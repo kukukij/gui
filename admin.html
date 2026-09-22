@@ -6,19 +6,16 @@
     <title>乌龟数据管理系统 · 后台</title>
     <link rel="icon" type="image/jpeg" href="index.jpg">
     <link rel="shortcut icon" type="image/jpeg" href="index.jpg">
-    <!-- ===== Font Awesome 图标库 ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js">
     </script>
     <style>
-        /* ===== v-cloak ===== */
         [v-cloak] {
             display: none !important;
         }
 
-        /* ===== 深色模式变量 ===== */
         :root {
             --bg: #f6f8fb;
             --surface: #ffffff;
@@ -47,7 +44,39 @@
             --toast-text: #0f172a;
         }
 
-        /* ===== 深色模式 ===== */
+        body[data-theme="purple"] {
+            --accent: #8b5cf6;
+            --accent-soft: #f5f3ff;
+            --accent-hover: #7c3aed;
+            --tag-bg: #f5f3ff;
+            --tag-text: #6d28d9;
+            --tag-hover: #ede9fe;
+        }
+        body[data-theme="green"] {
+            --accent: #059669;
+            --accent-soft: #ecfdf5;
+            --accent-hover: #047857;
+            --tag-bg: #ecfdf5;
+            --tag-text: #047857;
+            --tag-hover: #d1fae5;
+        }
+        body[data-theme="orange"] {
+            --accent: #ea580c;
+            --accent-soft: #fff7ed;
+            --accent-hover: #c2410c;
+            --tag-bg: #fff7ed;
+            --tag-text: #c2410c;
+            --tag-hover: #fed7aa;
+        }
+        body[data-theme="pink"] {
+            --accent: #db2777;
+            --accent-soft: #fdf2f8;
+            --accent-hover: #be185d;
+            --tag-bg: #fdf2f8;
+            --tag-text: #be185d;
+            --tag-hover: #fbcfe8;
+        }
+
         body.dark-mode {
             --bg: #0f172a;
             --surface: #1e293b;
@@ -60,16 +89,39 @@
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
             --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-            --accent-soft: #1e3a5f;
             --danger-soft: #3b1a1a;
-            --tag-bg: #1e3a5f;
-            --tag-text: #93c5fd;
-            --tag-hover: #1e4a7a;
             --toast-bg: #1e293b;
             --toast-text: #f1f5f9;
         }
+        body.dark-mode[data-theme="blue"],
+        body.dark-mode {
+            --accent-soft: #1e3a5f;
+        }
+        body.dark-mode[data-theme="purple"] {
+            --accent-soft: #2e1a5f;
+            --tag-bg: #2e1a5f;
+            --tag-text: #c4b5fd;
+            --tag-hover: #3d2678;
+        }
+        body.dark-mode[data-theme="green"] {
+            --accent-soft: #1a3d2e;
+            --tag-bg: #1a3d2e;
+            --tag-text: #6ee7b7;
+            --tag-hover: #1e5240;
+        }
+        body.dark-mode[data-theme="orange"] {
+            --accent-soft: #3d2210;
+            --tag-bg: #3d2210;
+            --tag-text: #fdba74;
+            --tag-hover: #5a3118;
+        }
+        body.dark-mode[data-theme="pink"] {
+            --accent-soft: #3d1a2e;
+            --tag-bg: #3d1a2e;
+            --tag-text: #f9a8d4;
+            --tag-hover: #5a2643;
+        }
 
-        /* ===== 基础样式 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -91,7 +143,6 @@
             flex-direction: column;
         }
 
-        /* ===== 侧边栏 ===== */
         .sidebar {
             width: 220px;
             background: var(--surface);
@@ -199,8 +250,6 @@
             text-align: center;
             opacity: 0.8;
         }
-
-        /* ===== 侧边栏底部（深色模式切换 + 本地存储） ===== */
         .sidebar-bottom {
             margin-top: auto;
             padding-top: 12px;
@@ -232,7 +281,6 @@
             color: var(--text-primary);
         }
 
-        /* ===== 主区域 ===== */
         .main {
             margin-left: 220px;
             padding: 32px 40px 48px;
@@ -244,7 +292,6 @@
             flex-direction: column;
         }
 
-        /* ===== 移动端顶部栏 ===== */
         .mobile-header {
             display: none;
             align-items: center;
@@ -337,7 +384,6 @@
             align-items: center;
         }
 
-        /* ===== 按钮 ===== */
         .btn {
             padding: 9px 20px;
             border: none;
@@ -359,13 +405,13 @@
             background: var(--accent);
             color: white;
             border-color: var(--accent);
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
         .btn-primary:hover {
             background: var(--accent-hover);
             border-color: var(--accent-hover);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         .btn-secondary {
             background: var(--surface);
@@ -424,7 +470,6 @@
             transform: none !important;
         }
 
-        /* ===== 批量操作 ===== */
         .batch-actions {
             display: flex;
             gap: 8px;
@@ -464,7 +509,6 @@
             white-space: nowrap;
         }
 
-        /* ===== 统计卡片 ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -526,7 +570,6 @@
             margin-top: 6px;
         }
 
-        /* ===== 卡片 ===== */
         .card {
             background: var(--surface);
             border-radius: var(--radius);
@@ -555,7 +598,121 @@
             border-radius: 4px;
         }
 
-        /* ===== 表格 ===== */
+        .data-warning {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: var(--radius);
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        body.dark-mode .data-warning {
+            background: #422006;
+            border-color: #854d0e;
+        }
+        .data-warning .warning-icon {
+            font-size: 24px;
+            color: #f59e0b;
+            flex-shrink: 0;
+            line-height: 1.2;
+        }
+        .data-warning .warning-content {
+            flex: 1;
+        }
+        .data-warning .warning-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 6px;
+        }
+        body.dark-mode .data-warning .warning-title {
+            color: #fbbf24;
+        }
+        .data-warning .warning-text {
+            font-size: 13px;
+            color: #78350f;
+            line-height: 1.7;
+        }
+        body.dark-mode .data-warning .warning-text {
+            color: #fcd34d;
+        }
+        .data-warning .warning-text strong {
+            font-weight: 600;
+        }
+
+        .theme-color-grid {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .theme-color-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .theme-color-item:hover {
+            background: var(--surface-hover);
+        }
+        .theme-color-item.active {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .theme-color-swatch {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            position: relative;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .theme-color-item.active .theme-color-swatch {
+            transform: scale(1.1);
+        }
+        .theme-color-item.active .theme-color-swatch::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+        }
+        .theme-color-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .theme-color-item.active .theme-color-label {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .swatch-blue {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        .swatch-purple {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+        }
+        .swatch-green {
+            background: linear-gradient(135deg, #34d399, #059669);
+        }
+        .swatch-orange {
+            background: linear-gradient(135deg, #fb923c, #ea580c);
+        }
+        .swatch-pink {
+            background: linear-gradient(135deg, #f472b6, #db2777);
+        }
+
         .table-wrap {
             overflow-x: auto;
             border-radius: var(--radius-sm);
@@ -598,7 +755,6 @@
             flex-wrap: wrap;
         }
 
-        /* ===== 复选框 ===== */
         .checkbox-wrap {
             display: flex;
             align-items: center;
@@ -617,7 +773,6 @@
             border-color: var(--accent);
         }
 
-        /* ===== 标签 ===== */
         .tag-group {
             display: flex;
             flex-wrap: wrap;
@@ -672,6 +827,7 @@
             font-family: inherit;
             min-width: 120px;
             transition: var(--transition);
+            color: var(--text-primary);
         }
         .tag-input-wrap input:focus {
             border-color: var(--accent);
@@ -682,7 +838,6 @@
             padding: 6px 16px;
         }
 
-        /* ===== 标签筛选 ===== */
         .tag-filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -737,7 +892,6 @@
             background: var(--surface-hover);
         }
 
-        /* ===== 徽章 ===== */
         .badge {
             display: inline-block;
             padding: 2px 12px;
@@ -760,7 +914,6 @@
             color: var(--text-tertiary);
         }
 
-        /* ===== 搜索 ===== */
         .search-wrapper {
             position: relative;
             flex: 1;
@@ -776,6 +929,7 @@
             background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 14px center;
             transition: var(--transition);
             font-family: inherit;
+            color: var(--text-primary);
         }
         .search-wrapper .search-input:focus {
             border-color: var(--accent);
@@ -820,7 +974,6 @@
             white-space: nowrap;
         }
 
-        /* ===== 详情 ===== */
         .detail-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -847,13 +1000,11 @@
             font-size: 13px;
         }
 
-        /* ===== 图表 ===== */
         .chart-container {
             position: relative;
             height: 260px;
         }
 
-        /* ===== 空状态 ===== */
         .empty-state {
             text-align: center;
             padding: 48px 20px;
@@ -874,7 +1025,6 @@
             margin-bottom: 16px;
         }
 
-        /* ===== 模态框 ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1001,7 +1151,6 @@
             font-size: 10px;
         }
 
-        /* ===== 确认弹窗 ===== */
         .confirm-modal .modal {
             max-width: 420px;
         }
@@ -1038,7 +1187,6 @@
             background: #fee2e2;
         }
 
-        /* ===== 表单 ===== */
         .form-group {
             margin-bottom: 16px;
         }
@@ -1089,13 +1237,42 @@
                 box-shadow: none;
             }
         }
+
+        @keyframes shakeLock {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-4px); }
+            40% { transform: translateX(4px); }
+            60% { transform: translateX(-3px); }
+            80% { transform: translateX(3px); }
+        }
+        .shake-lock {
+            animation: shakeLock 0.4s ease;
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+        }
+        .field-hint.lock-hint {
+            font-size: 11px;
+            color: var(--accent);
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: fadeInHint 0.3s ease;
+        }
+        .field-hint.lock-hint i {
+            font-size: 11px;
+        }
+        @keyframes fadeInHint {
+            from { opacity: 0; transform: translateY(-2px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
         }
 
-        /* ===== Toast ===== */
         .toast-container {
             position: fixed;
             top: 24px;
@@ -1160,7 +1337,6 @@
             }
         }
 
-        /* ===== 移动端 ===== */
         @media (max-width: 820px) {
             .sidebar {
                 width: 100%;
@@ -1222,7 +1398,6 @@
                 width: 100%;
                 overflow-x: hidden;
             }
-            /* 给主内容顶部留出移动端header的空间 */
             .main > .page-header:first-of-type {
                 margin-top: 16px;
             }
@@ -1345,6 +1520,29 @@
             .search-bar {
                 flex-wrap: wrap;
             }
+            .data-warning {
+                padding: 14px 16px;
+                gap: 10px;
+            }
+            .data-warning .warning-icon {
+                font-size: 20px;
+            }
+            .data-warning .warning-title {
+                font-size: 14px;
+            }
+            .data-warning .warning-text {
+                font-size: 12px;
+            }
+            .theme-color-grid {
+                gap: 10px;
+            }
+            .theme-color-item {
+                padding: 8px 10px;
+            }
+            .theme-color-swatch {
+                width: 38px;
+                height: 38px;
+            }
         }
         @media (max-width: 420px) {
             .stats-grid {
@@ -1408,26 +1606,15 @@
         tbody tr.selected {
             background: var(--accent-soft);
         }
-        tbody tr.selected:hover {
-            background: #dbeafe;
-        }
         body.dark-mode tbody tr.selected {
-            background: #1e3a5f;
-        }
-        body.dark-mode tbody tr.selected:hover {
-            background: #1e4a7a;
-        }
-        .data-management .card:last-child {
-            margin-bottom: 0;
+            background: var(--accent-soft);
         }
     </style>
 </head>
 <body>
     <div id="app" v-cloak>
 
-        <!-- 侧边栏 -->
         <aside class="sidebar">
-            <!-- 点击品牌区域回主页 -->
             <a href="index.html" class="sidebar-brand" style="text-decoration:none;">
                 <div class="brand-top">
                     <div class="brand-logo">
@@ -1447,7 +1634,6 @@
                 <span>{{ item.label }}</span>
             </div>
         </nav>
-        <!-- 侧边栏底部：本地存储 + 深色模式切换 -->
         <div class="sidebar-bottom">
             <span class="sidebar-footer">本地存储 · 离线可用</span>
             <button class="theme-toggle-btn" @click="toggleTheme" :title="isDarkMode ? '切换到亮色模式' : '切换到深色模式'">
@@ -1456,7 +1642,6 @@
         </div>
     </aside>
 
-    <!-- 移动端顶部栏 -->
     <header class="mobile-header">
         <a href="index.html" class="mobile-brand">
             <img src="index.jpg" alt="Logo" @error="handleMobileLogoError">
@@ -1472,18 +1657,13 @@
         </div>
     </header>
 
-    <!-- 主区域 -->
     <main class="main">
 
-        <!-- ========= 仪表盘 ========= -->
         <div v-if="currentPage === 'dashboard'">
             <div class="page-header">
                 <div>
                     <div class="page-title">仪表盘</div>
                     <div class="page-subtitle">养殖数据概览</div>
-                </div>
-                <div class="header-actions">
-                    <!-- 仪表盘不显示回主页按钮，只保留侧边栏 -->
                 </div>
             </div>
             <div class="stats-grid">
@@ -1537,7 +1717,6 @@
             </div>
         </div>
 
-        <!-- ========= 乌龟档案 ========= -->
         <div v-if="currentPage === 'turtles' && !currentTurtleId">
             <div class="page-header">
                 <div>
@@ -1630,7 +1809,6 @@
             </div>
         </div>
 
-        <!-- ========= 乌龟详情 ========= -->
         <div v-if="currentPage === 'turtles' && currentTurtleId && currentTurtle">
             <div class="page-header">
                 <div>
@@ -1678,14 +1856,13 @@
                 </div>
                 <div v-else class="table-wrap">
                     <table>
-                        <thead><tr><th>日期</th><th>体重(g)</th><th>背甲长(cm)</th><th>背甲宽(cm)</th><th>体高(cm)</th><th>备注</th><th></th></tr></thead>
+                        <thead><tr><th>日期</th><th>体重(g)</th><th>背甲长(cm)</th><th>背甲宽(cm)</th><th>备注</th><th></th></tr></thead>
                         <tbody>
                             <tr v-for="r in currentTurtleRecords.slice().reverse()" :key="r.id">
                                 <td>{{ r.date }}</td>
                                 <td>{{ r.weight ?? '-' }}</td>
                                 <td>{{ r.carapaceLength ?? '-' }}</td>
                                 <td>{{ r.carapaceWidth ?? '-' }}</td>
-                                <td>{{ r.height ?? '-' }}</td>
                                 <td style="color:var(--text-secondary)">{{ r.notes || '-' }}</td>
                                 <td>
                                     <div class="actions">
@@ -1700,7 +1877,6 @@
             </div>
         </div>
 
-        <!-- ========= 生长记录 ========= -->
         <div v-if="currentPage === 'records'">
             <div class="page-header">
                 <div>
@@ -1725,7 +1901,7 @@
                 </div>
                 <div v-else class="table-wrap">
                     <table>
-                        <thead><tr><th>日期</th><th>乌龟</th><th>品种</th><th>体重(g)</th><th>背甲长(cm)</th><th>背甲宽(cm)</th><th>体高(cm)</th><th>备注</th><th></th></tr></thead>
+                        <thead><tr><th>日期</th><th>乌龟</th><th>品种</th><th>体重(g)</th><th>背甲长(cm)</th><th>背甲宽(cm)</th><th>备注</th><th></th></tr></thead>
                         <tbody>
                             <tr v-for="r in filteredRecords" :key="r.id">
                                 <td>{{ r.date }}</td>
@@ -1734,7 +1910,6 @@
                                 <td>{{ r.weight ?? '-' }}</td>
                                 <td>{{ r.carapaceLength ?? '-' }}</td>
                                 <td>{{ r.carapaceWidth ?? '-' }}</td>
-                                <td>{{ r.height ?? '-' }}</td>
                                 <td style="color:var(--text-secondary)">{{ r.notes || '-' }}</td>
                                 <td>
                                     <div class="actions">
@@ -1749,20 +1924,34 @@
             </div>
         </div>
 
-        <!-- ========= 数据管理 ========= -->
-        <div v-if="currentPage === 'data'" class="data-management">
+        <!-- ========= 设置页 ========= -->
+        <div v-if="currentPage === 'settings'">
             <div class="page-header">
                 <div>
-                    <div class="page-title">数据管理</div>
-                    <div class="page-subtitle">备份 · 恢复 · 维护</div>
+                    <div class="page-title">设置</div>
+                    <div class="page-subtitle">数据管理 · 主题外观</div>
                 </div>
-                <div class="header-actions"></div>
+            </div>
+
+            <!-- 数据管理（放前面） -->
+            <div class="data-warning">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                    <div class="warning-title">数据存储在本地，请及时备份</div>
+                    <div class="warning-text">
+                        所有数据都存储在您的<strong>浏览器本地</strong>，不会上传到服务器。
+                        因此，<strong>更换手机、电脑或浏览器，清除浏览器数据，使用无痕模式</strong>等操作都可能导致数据丢失。
+                        为防止数据丢失，<strong>强烈建议定期导出 JSON 备份文件</strong>并妥善保存。
+                    </div>
+                </div>
             </div>
 
             <div class="card">
                 <div class="card-title">导出备份</div>
                 <p style="color:var(--text-secondary);margin-bottom:14px;">导出所有数据为 JSON 文件，用于永久保存或迁移。</p>
-                <button class="btn btn-primary" @click="exportData">导出 JSON</button>
+                <button class="btn btn-primary" @click="exportData">
+                    <i class="fas fa-download"></i> 导出 JSON
+                </button>
             </div>
 
             <div class="card">
@@ -1770,6 +1959,7 @@
                 <p style="color:var(--text-secondary);margin-bottom:14px;">从 JSON 文件恢复数据，将覆盖当前所有内容。</p>
                 <button class="btn btn-secondary" @click="openImportConfirm" :disabled="isImporting">
                     <i v-if="isImporting" class="fas fa-spinner fa-spin"></i>
+                    <i v-else class="fas fa-upload"></i>
                     {{ isImporting ? '导入中...' : '选择 JSON 文件' }}
                 </button>
                 <input type="file" ref="importInput" accept=".json" style="display:none" @change="handleImportFile">
@@ -1778,7 +1968,24 @@
             <div class="card">
                 <div class="card-title" style="color:var(--danger);">清空数据库</div>
                 <p style="color:var(--text-secondary);margin-bottom:14px;">永久删除所有数据，建议先导出备份。</p>
-                <button class="btn btn-danger" @click="confirmClearAll">清空所有数据</button>
+                <button class="btn btn-danger" @click="confirmClearAll">
+                    <i class="fas fa-trash"></i> 清空所有数据
+                </button>
+            </div>
+
+            <!-- 主题色（放最后） -->
+            <div class="card">
+                <div class="card-title">🎨 主题色</div>
+                <p style="color:var(--text-secondary);margin-bottom:18px;">选择你喜欢的主题颜色，立即生效并自动保存。</p>
+                <div class="theme-color-grid">
+                    <div v-for="theme in themeColors" :key="theme.value"
+                    class="theme-color-item"
+                    :class="{ active: currentTheme === theme.value }"
+                    @click="setTheme(theme.value)">
+                        <div class="theme-color-swatch" :class="'swatch-' + theme.value"></div>
+                        <div class="theme-color-label">{{ theme.label }}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -2009,9 +2216,18 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>乌龟</label>
-                        <select v-model="recordForm.turtleId">
-                            <option v-for="t in turtles" :key="t.id" :value="t.id">{{ t.code }} {{ t.name ? '('+t.name+')' : '' }} — {{ t.species }}</option>
+                        <select 
+                            v-model="recordForm.turtleId" 
+                            :class="{ 'shake-lock': turtleLockShake }"
+                            @mousedown="handleTurtleSelectClick"
+                        >
+                            <option v-for="t in turtles" :key="t.id" :value="t.id">
+                                {{ t.code }} {{ t.name ? '('+t.name+')' : '' }} — {{ t.species }}
+                            </option>
                         </select>
+                        <div v-if="editingRecordId && turtleLockHint" class="field-hint lock-hint">
+                            <i class="fas fa-lock"></i> 编辑记录时不可更换乌龟
+                        </div>
                     </div>
                     <div class="form-group" :class="{ error: validationErrors.recordDate }">
                         <label>测量日期 <span class="required-star">*</span></label>
@@ -2028,15 +2244,9 @@
                         <input type="number" step="0.1" v-model.number="recordForm.carapaceLength" placeholder="cm">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>背甲宽 (cm)</label>
-                        <input type="number" step="0.1" v-model.number="recordForm.carapaceWidth" placeholder="cm">
-                    </div>
-                    <div class="form-group">
-                        <label>体高 (cm)</label>
-                        <input type="number" step="0.1" v-model.number="recordForm.height" placeholder="cm">
-                    </div>
+                <div class="form-group">
+                    <label>背甲宽 (cm)</label>
+                    <input type="number" step="0.1" v-model.number="recordForm.carapaceWidth" placeholder="cm">
                 </div>
                 <div class="form-group">
                     <label>备注</label>
@@ -2050,7 +2260,6 @@
         </div>
     </div>
 
-    <!-- Toast 容器 -->
     <div class="toast-container">
         <div v-for="(toast, index) in toastQueue" :key="index"
         class="toast" :class="{ show: toast.visible, error: toast.type === 'error', success: toast.type === 'success' }">
@@ -2061,9 +2270,8 @@
 </div>
 
 <script>
-    const { createApp, ref, reactive, computed, onMounted, nextTick, toRaw, watch } = Vue;
+    const { createApp, ref, reactive, computed, onMounted, nextTick, toRaw } = Vue;
 
-    // ---- IndexedDB 封装 ----
     const DB_NAME = 'TurtleFarmDB',
         VERSION = 1;
     const STORE_TURTLES = 'turtles',
@@ -2145,29 +2353,34 @@
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
 
-    // ---- App ----
     createApp({
         setup() {
             const navItems = [
                 { page: 'dashboard', label: '仪表盘', icon: '📊' },
                 { page: 'turtles', label: '乌龟档案', icon: '🐢' },
                 { page: 'records', label: '生长记录', icon: '📝' },
-                { page: 'data', label: '数据管理', icon: '💾' },
+                { page: 'settings', label: '设置', icon: '⚙️' },
             ];
 
-            // ---- 页面状态持久化 ----
+            const themeColors = [
+                { value: 'blue', label: '蓝色' },
+                { value: 'purple', label: '紫色' },
+                { value: 'green', label: '绿色' },
+                { value: 'orange', label: '橙色' },
+                { value: 'pink', label: '粉色' },
+            ];
+
             const STORAGE_KEY_PAGE = 'turtle_farm_current_page';
             const STORAGE_KEY_TURTLE_ID = 'turtle_farm_current_turtle_id';
             const STORAGE_KEY_THEME = 'turtle_farm_theme';
+            const STORAGE_KEY_THEME_COLOR = 'turtle_farm_theme_color';
 
             const currentPage = ref('dashboard');
             const currentTurtleId = ref(null);
             const isDarkMode = ref(false);
-
-            // ---- 导入状态 ----
             const isImporting = ref(false);
+            const currentTheme = ref('blue');
 
-            // ---- 其他状态 ----
             const turtles = ref([]);
             const records = ref([]);
             const turtleSearch = ref('');
@@ -2189,14 +2402,15 @@
             const selectedTag = ref('');
             const pendingImportFile = ref(null);
 
-            // ---- 表单验证 ----
+            const turtleLockShake = ref(false);
+            const turtleLockHint = ref(false);
+
             const validationErrors = reactive({ code: false, species: false, recordDate: false });
 
             const clearError = (field) => {
                 validationErrors[field] = false;
             };
 
-            // ---- Toast 队列 ----
             const toastQueue = ref([]);
             let toastIdCounter = 0;
 
@@ -2214,8 +2428,6 @@
                             }, 350);
                         }
                     }, duration);
-                } else {
-                    // loading toast 不自动消失，需要手动隐藏
                 }
                 if (toastQueue.value.length > 5) {
                     toastQueue.value = toastQueue.value.slice(-5);
@@ -2233,7 +2445,6 @@
                 }
             };
 
-            // ---- 深色模式 ----
             const toggleTheme = () => {
                 isDarkMode.value = !isDarkMode.value;
                 localStorage.setItem(STORAGE_KEY_THEME, isDarkMode.value ? 'dark' : 'light');
@@ -2248,31 +2459,32 @@
                 }
             };
 
-            // ---- 批量删除相关 ----
+            const setTheme = (theme) => {
+                currentTheme.value = theme;
+                document.body.setAttribute('data-theme', theme);
+                localStorage.setItem(STORAGE_KEY_THEME_COLOR, theme);
+            };
+
             const selectedTurtleIds = ref([]);
             const confirmCount = ref(0);
             const confirmNames = ref('');
 
-            // ---- 单只删除相关 ----
             const deleteTurtleId = ref(null);
             const deleteTurtleName = ref('');
             const deleteTurtleRecordCount = ref(0);
 
-            // ---- 单条记录删除相关 ----
             const deleteRecordId = ref(null);
             const deleteRecordTurtleName = ref('');
             const deleteRecordDate = ref('');
 
-            // ---- 标签模态框相关 ----
             const tagModalInput = ref('');
             const tagModalSelected = ref([]);
 
             const turtleForm = reactive({ code: '', name: '', species: '', gender: '未知', birthDate: '',
                 purchaseDate: '', purchaseChannel: '', habitat: '', notes: '', tags: [] });
             const recordForm = reactive({ turtleId: '', date: '', weight: null, carapaceLength: null,
-                carapaceWidth: null, height: null, notes: '' });
+                carapaceWidth: null, notes: '' });
 
-            // ---- Logo 加载失败处理 ----
             const handleLogoError = (e) => {
                 e.target.style.display = 'none';
                 const parent = e.target.parentElement;
@@ -2286,7 +2498,18 @@
                 e.target.style.display = 'none';
             };
 
-            // ========== 导航（持久化） ==========
+            const handleTurtleSelectClick = (e) => {
+                if (!editingRecordId.value) return;
+                e.preventDefault();
+                e.stopPropagation();
+                turtleLockShake.value = false;
+                nextTick(() => {
+                    turtleLockShake.value = true;
+                    setTimeout(() => { turtleLockShake.value = false; }, 400);
+                });
+                turtleLockHint.value = true;
+            };
+
             const navigate = (page, turtleId = null) => {
                 currentPage.value = page;
                 currentTurtleId.value = turtleId || null;
@@ -2305,7 +2528,6 @@
                 navigate('turtles', id);
             };
 
-            // ========== 计算属性 ==========
             const currentTurtle = computed(() => turtles.value.find(t => t.id === currentTurtleId.value));
             const currentTurtleRecords = computed(() => records.value
                 .filter(r => r.turtleId === currentTurtleId.value)
@@ -2359,7 +2581,6 @@
                 selectedTurtleIds.value = [];
             };
 
-            // ========== 批量删除 ==========
             const confirmBatchDelete = () => {
                 if (selectedTurtleIds.value.length === 0) return;
                 const ids = selectedTurtleIds.value;
@@ -2392,7 +2613,6 @@
                 }
             };
 
-            // ========== 单只乌龟删除 ==========
             const confirmDeleteTurtle = (id) => {
                 const t = turtles.value.find(x => x.id === id);
                 if (!t) return;
@@ -2422,7 +2642,6 @@
                 }
             };
 
-            // ========== 单条记录删除 ==========
             const confirmDeleteRecord = (id) => {
                 const r = records.value.find(x => x.id === id);
                 if (!r) return;
@@ -2445,7 +2664,6 @@
                 }
             };
 
-            // ========== 清空所有数据 ==========
             const confirmClearAll = () => {
                 if (turtles.value.length === 0 && records.value.length === 0) {
                     showToast('数据已经是空的', 'error');
@@ -2466,7 +2684,6 @@
                 }
             };
 
-            // ========== 导入数据（带 loading 反馈） ==========
             const openImportConfirm = () => {
                 if (!importInput.value) return;
                 importInput.value.click();
@@ -2483,10 +2700,11 @@
             const executeImport = async () => {
                 const file = pendingImportFile.value;
                 if (!file) { showImportConfirmModal.value = false; return; }
+                let loadingToastId = null;
                 try {
                     isImporting.value = true;
                     showImportConfirmModal.value = false;
-                    const loadingToastId = showToast('正在导入数据，请稍候...', 'success', 0, true);
+                    loadingToastId = showToast('正在导入数据，请稍候...', 'success', 0, true);
 
                     const text = await file.text();
                     const data = JSON.parse(text);
@@ -2502,7 +2720,7 @@
                     await loadData();
                     showToast(`✅ 导入成功：${data.turtles.length} 只乌龟，${data.records.length} 条记录`);
                 } catch (err) {
-                    hideToast(loadingToastId);
+                    if (loadingToastId) hideToast(loadingToastId);
                     pendingImportFile.value = null;
                     showToast('❌ 导入失败：' + err.message, 'error');
                 } finally {
@@ -2510,7 +2728,6 @@
                 }
             };
 
-            // ========== 标签模态框 ==========
             const openTagModal = () => {
                 if (turtles.value.length === 0) {
                     showToast('请先添加乌龟', 'error');
@@ -2548,7 +2765,6 @@
                 }
             };
 
-            // ========== 单个标签操作 ==========
             const addTag = async (turtleId) => {
                 const input = newTagMap[turtleId];
                 if (!input || !input.trim()) return;
@@ -2582,7 +2798,6 @@
                 }
             };
 
-            // ========== 乌龟 CRUD ==========
             const openTurtleModal = (id) => {
                 editingTurtleId.value = id || null;
                 validationErrors.code = false;
@@ -2656,11 +2871,12 @@
                 }
             };
 
-            // ========== 记录 CRUD ==========
             const openRecordModal = (turtleId, record) => {
                 if (turtles.value.length === 0) { showToast('请先添加乌龟档案', 'error'); return; }
                 validationErrors.recordDate = false;
                 editingRecordId.value = record ? record.id : null;
+                turtleLockHint.value = false;
+                turtleLockShake.value = false;
                 if (record) {
                     Object.assign(recordForm, {
                         turtleId: record.turtleId,
@@ -2668,7 +2884,6 @@
                         weight: record.weight ?? '',
                         carapaceLength: record.carapaceLength ?? '',
                         carapaceWidth: record.carapaceWidth ?? '',
-                        height: record.height ?? '',
                         notes: record.notes || ''
                     });
                 } else {
@@ -2678,7 +2893,6 @@
                         weight: '',
                         carapaceLength: '',
                         carapaceWidth: '',
-                        height: '',
                         notes: ''
                     });
                 }
@@ -2706,13 +2920,14 @@
                     weight: recordForm.weight || null,
                     carapaceLength: recordForm.carapaceLength || null,
                     carapaceWidth: recordForm.carapaceWidth || null,
-                    height: recordForm.height || null,
                     notes: recordForm.notes.trim()
                 };
                 try {
                     if (editingRecordId.value) {
                         const existing = records.value.find(r => r.id === editingRecordId.value);
-                        await dbPut(STORE_RECORDS, { ...existing, ...data });
+                        const updated = { ...existing, ...data, turtleId: existing.turtleId };
+                        delete updated.height;
+                        await dbPut(STORE_RECORDS, updated);
                         showToast('记录已更新');
                     } else {
                         const newRecord = { id: uid(), ...data };
@@ -2727,7 +2942,6 @@
                 }
             };
 
-            // ========== 数据管理（导出） ==========
             const exportData = () => {
                 try {
                     const data = { version: 1, exportTime: new Date().toISOString(), turtles: turtles.value,
@@ -2745,7 +2959,6 @@
                 }
             };
 
-            // ========== 工具函数 ==========
             const turtleName = (id) => {
                 const t = turtles.value.find(x => x.id === id);
                 return t ? (t.name || t.code) : '未知';
@@ -2796,7 +3009,6 @@
                 return count > 0 ? (total / count).toFixed(1) : '0';
             });
 
-            // ========== 加载数据 & 图表 ==========
             const loadData = async () => {
                 try {
                     turtles.value = await dbAll(STORE_TURTLES);
@@ -2935,7 +3147,6 @@
                 }
             };
 
-            // ========== 初始化 ==========
             const FIRST_LOAD_KEY = 'turtle_farm_first_load_done';
 
             const restorePageState = () => {
@@ -2951,7 +3162,6 @@
                     currentPage.value = 'dashboard';
                 }
 
-                // 恢复主题
                 const savedTheme = localStorage.getItem(STORAGE_KEY_THEME);
                 if (savedTheme === 'dark') {
                     isDarkMode.value = true;
@@ -2959,6 +3169,10 @@
                     isDarkMode.value = false;
                 }
                 updateThemeClass();
+
+                const savedThemeColor = localStorage.getItem(STORAGE_KEY_THEME_COLOR) || 'blue';
+                currentTheme.value = savedThemeColor;
+                document.body.setAttribute('data-theme', savedThemeColor);
             };
 
             restorePageState();
@@ -2988,25 +3202,25 @@
 
                             const samples = [
                                 { turtleId: t1.id, date: '2024-01-15', weight: 85, carapaceLength: 6.2,
-                                    carapaceWidth: 4.8, height: 2.5, notes: '冬眠后' },
+                                    carapaceWidth: 4.8, notes: '冬眠后' },
                                 { turtleId: t1.id, date: '2024-04-15', weight: 102, carapaceLength: 6.8,
-                                    carapaceWidth: 5.2, height: 2.7, notes: '' },
+                                    carapaceWidth: 5.2, notes: '' },
                                 { turtleId: t1.id, date: '2024-07-15', weight: 130, carapaceLength: 7.5,
-                                    carapaceWidth: 5.7, height: 3.0, notes: '夏季' },
+                                    carapaceWidth: 5.7, notes: '夏季' },
                                 { turtleId: t1.id, date: '2024-10-15', weight: 148, carapaceLength: 8.1,
-                                    carapaceWidth: 6.1, height: 3.2, notes: '' },
+                                    carapaceWidth: 6.1, notes: '' },
                                 { turtleId: t1.id, date: '2025-01-15', weight: 155, carapaceLength: 8.3,
-                                    carapaceWidth: 6.3, height: 3.3, notes: '' },
+                                    carapaceWidth: 6.3, notes: '' },
                                 { turtleId: t2.id, date: '2024-01-15', weight: 210, carapaceLength: 9.5,
-                                    carapaceWidth: 7.2, height: 4.0, notes: '' },
+                                    carapaceWidth: 7.2, notes: '' },
                                 { turtleId: t2.id, date: '2024-04-15', weight: 245, carapaceLength: 10.2,
-                                    carapaceWidth: 7.8, height: 4.3, notes: '' },
+                                    carapaceWidth: 7.8, notes: '' },
                                 { turtleId: t2.id, date: '2024-07-15', weight: 290, carapaceLength: 11.0,
-                                    carapaceWidth: 8.4, height: 4.6, notes: '产卵期' },
+                                    carapaceWidth: 8.4, notes: '产卵期' },
                                 { turtleId: t2.id, date: '2024-10-15', weight: 310, carapaceLength: 11.5,
-                                    carapaceWidth: 8.7, height: 4.8, notes: '' },
+                                    carapaceWidth: 8.7, notes: '' },
                                 { turtleId: t3.id, date: '2024-06-01', weight: 12, carapaceLength: 3.2,
-                                    carapaceWidth: 2.5, height: 1.0, notes: '刚出壳' },
+                                    carapaceWidth: 2.5, notes: '刚出壳' },
                             ];
                             for (const r of samples) {
                                 await dbAdd(STORE_RECORDS, { id: uid(), ...r });
@@ -3024,6 +3238,7 @@
 
             return {
                 navItems,
+                themeColors,
                 currentPage,
                 currentTurtleId,
                 turtles,
@@ -3073,7 +3288,12 @@
                 clearError,
                 isDarkMode,
                 isImporting,
+                currentTheme,
                 toggleTheme,
+                setTheme,
+                turtleLockShake,
+                turtleLockHint,
+                handleTurtleSelectClick,
                 navigate,
                 viewTurtle,
                 turtleName,

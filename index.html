@@ -45,7 +45,6 @@
             --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        /* ===== 全局重置 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -159,7 +158,6 @@
             color: white !important;
         }
 
-        /* ===== 主题切换按钮 ===== */
         .theme-toggle {
             background: none;
             border: none;
@@ -471,20 +469,25 @@
             margin-top: 64px;
             padding: 32px 24px 24px;
             border-top: 1px solid var(--border-light);
+            transition: border-color 0.3s ease;
+        }
+
+        /* 第一行：版权 + 右侧导航 */
+        .footer-home .footer-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 16px;
             font-size: 13px;
             color: var(--text-tertiary);
-            transition: border-color 0.3s ease, color 0.3s ease;
         }
 
         .footer-home .footer-left {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .footer-home .footer-left .brand-name {
@@ -493,17 +496,11 @@
             transition: color 0.3s ease;
         }
 
-        .footer-home .footer-center .icp {
-            color: var(--text-tertiary);
-            opacity: 0.6;
-            font-size: 12px;
-            transition: color 0.3s ease;
-        }
-
         .footer-home .footer-right {
             display: flex;
             align-items: center;
             gap: 16px;
+            flex-wrap: wrap;
         }
 
         .footer-home .footer-right a {
@@ -536,6 +533,58 @@
 
         .footer-home .footer-right .qq-link i {
             font-size: 18px;
+        }
+
+        /* 第二行：许可证（左） + ICP备案（中） */
+        .footer-home .footer-bottom {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            transition: border-color 0.3s ease;
+        }
+
+        .footer-home .footer-bottom .license-text {
+            flex: 1;
+            text-align: left;
+            min-width: 200px;
+        }
+
+        .footer-home .footer-bottom .license-text a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-home .footer-bottom .license-text a:hover {
+            color: var(--accent);
+        }
+
+        .footer-home .footer-bottom .icp-center {
+            flex: 1;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .footer-home .footer-bottom .icp-center a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-home .footer-bottom .icp-center a:hover {
+            color: var(--accent);
+        }
+
+        .footer-home .footer-bottom .footer-spacer {
+            flex: 1;
+            min-width: 200px;
         }
 
         /* ===== 响应式 ===== */
@@ -586,7 +635,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-home {
+            .footer-home .footer-main {
                 flex-direction: column;
                 text-align: center;
             }
@@ -602,6 +651,19 @@
 
             .navbar .nav-right {
                 gap: 8px;
+            }
+
+            .footer-home .footer-bottom {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .footer-home .footer-bottom .license-text,
+            .footer-home .footer-bottom .icp-center,
+            .footer-home .footer-bottom .footer-spacer {
+                text-align: center;
+                min-width: auto;
+                flex: none;
             }
         }
     </style>
@@ -676,7 +738,7 @@
                 <div class="feature-card">
                     <span class="icon">📝</span>
                     <h3>生长记录</h3>
-                    <p>记录体重、背甲长、背甲宽、体高，支持备注与日期，形成完整的生长档案。</p>
+                    <p>记录体重、背甲长、背甲宽，支持备注与日期，形成完整的生长档案。</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon">🐢</span>
@@ -727,21 +789,31 @@
 
         <!-- ===== 底部（主页） ===== -->
         <footer class="footer-home">
-            <div class="footer-left">
-                <span>Copyright © 2026</span>
-                <span class="brand-name">kuki</span>
-                <span>乌龟数据管理系统</span>
+            <!-- 第一行：版权 + 右侧导航 -->
+            <div class="footer-main">
+                <div class="footer-left">
+                    <span>Copyright © 2026</span>
+                    <span class="brand-name">kuki</span>
+                    <span>乌龟数据管理系统 · 保留所有权利</span>
+                </div>
+                <div class="footer-right">
+                    <a href="admin.html">后台管理</a>
+                    <a href="#features">功能</a>
+                    <a href="#tech">技术栈</a>
+                    <a href="https://qm.qq.com/q/QxePeoPZ2A" target="_blank" class="qq-link" title="联系我">
+                        <i class="fab fa-qq"></i> QQ联系
+                    </a>
+                </div>
             </div>
-            <div class="footer-center">
-                <span class="icp">ICP备案号：待备案</span>
-            </div>
-            <div class="footer-right">
-                <a href="admin.html">后台管理</a>
-                <a href="#features">功能</a>
-                <a href="#tech">技术栈</a>
-                <a href="https://qm.qq.com/q/QxePeoPZ2A" target="_blank" class="qq-link" title="联系我">
-                    <i class="fab fa-qq"></i> QQ联系
-                </a>
+            <!-- 第二行：许可证（左） + ICP备案（中） -->
+            <div class="footer-bottom">
+                <div class="license-text">
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans" target="_blank" rel="noopener">本项目采用 CC BY-NC 4.0 许可协议 · 禁止商业用途</a>
+                </div>
+                <div class="icp-center">
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026141695号</a>
+                </div>
+                <div class="footer-spacer"></div>
             </div>
         </footer>
 
@@ -754,7 +826,6 @@
             const themeToggle = document.getElementById('themeToggle');
             const icon = themeToggle.querySelector('i');
 
-            // 检测系统偏好
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem(STORAGE_KEY);
 
@@ -779,17 +850,13 @@
                 localStorage.setItem(STORAGE_KEY, dark ? 'dark' : 'light');
             }
 
-            // 初始应用
             applyTheme(isDark);
 
-            // 切换事件
             themeToggle.addEventListener('click', function() {
                 applyTheme(!isDark);
             });
 
-            // 监听系统主题变化
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-                // 仅当用户没有手动设置过时才跟随系统
                 if (!localStorage.getItem(STORAGE_KEY)) {
                     applyTheme(e.matches);
                 }
