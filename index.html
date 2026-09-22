@@ -6,10 +6,8 @@
     <title>乌龟数据管理系统 · 主页</title>
     <link rel="icon" type="image/jpeg" href="index.jpg">
     <link rel="shortcut icon" type="image/jpeg" href="index.jpg">
-    <!-- ===== Font Awesome 图标库 ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ===== 深色模式变量 ===== */
         :root {
             --bg: #f6f8fb;
             --surface: #ffffff;
@@ -30,6 +28,29 @@
             --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
+        /* 主题色变体 */
+        body[data-theme="purple"] {
+            --accent: #8b5cf6;
+            --accent-soft: #f5f3ff;
+            --accent-hover: #7c3aed;
+        }
+        body[data-theme="green"] {
+            --accent: #059669;
+            --accent-soft: #ecfdf5;
+            --accent-hover: #047857;
+        }
+        body[data-theme="orange"] {
+            --accent: #ea580c;
+            --accent-soft: #fff7ed;
+            --accent-hover: #c2410c;
+        }
+        body[data-theme="pink"] {
+            --accent: #db2777;
+            --accent-soft: #fdf2f8;
+            --accent-hover: #be185d;
+        }
+
+        /* 深色模式 */
         body.dark-mode {
             --bg: #0f172a;
             --surface: #1e293b;
@@ -37,18 +58,29 @@
             --text-secondary: #cbd5e1;
             --text-tertiary: #94a3b8;
             --border-light: #334155;
-            --accent-soft: #1e3a5f;
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
             --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
             --navbar-bg: rgba(15, 23, 42, 0.92);
             --visual-bg: linear-gradient(145deg, #1e293b, #0f172a);
             --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
+        body.dark-mode[data-theme="blue"],
+        body.dark-mode {
+            --accent-soft: #1e3a5f;
+        }
+        body.dark-mode[data-theme="purple"] { --accent-soft: #2e1a5f; }
+        body.dark-mode[data-theme="green"] { --accent-soft: #1a3d2e; }
+        body.dark-mode[data-theme="orange"] { --accent-soft: #3d2210; }
+        body.dark-mode[data-theme="pink"] { --accent-soft: #3d1a2e; }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -58,6 +90,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
         /* ===== 导航栏 ===== */
@@ -69,13 +102,20 @@
             z-index: 50;
             background: var(--navbar-bg);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid transparent;
             padding: 0 40px;
             height: 68px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .navbar.scrolled {
+            border-bottom-color: var(--border-light);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+        body.dark-mode .navbar.scrolled {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
         }
 
         .navbar .logo {
@@ -84,7 +124,6 @@
             gap: 12px;
             text-decoration: none;
         }
-
         .navbar .logo img {
             width: 40px;
             height: 40px;
@@ -93,7 +132,6 @@
             background: var(--accent-soft);
             transition: background 0.3s ease;
         }
-
         .navbar .logo .logo-placeholder {
             width: 40px;
             height: 40px;
@@ -102,10 +140,9 @@
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 18px;
             color: var(--accent);
         }
-
         .navbar .logo-text {
             font-size: 18px;
             font-weight: 600;
@@ -113,7 +150,6 @@
             letter-spacing: -0.3px;
             transition: color 0.3s ease;
         }
-
         .navbar .logo-text span {
             color: var(--accent);
         }
@@ -123,7 +159,6 @@
             align-items: center;
             gap: 16px;
         }
-
         .navbar .nav-right a {
             color: var(--text-secondary);
             text-decoration: none;
@@ -131,7 +166,6 @@
             font-weight: 500;
             transition: var(--transition);
         }
-
         .navbar .nav-right a:hover {
             color: var(--accent);
         }
@@ -147,14 +181,13 @@
             font-size: 14px;
             font-family: inherit;
             transition: var(--transition);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             text-decoration: none !important;
         }
-
         .btn-enter:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
             color: white !important;
         }
 
@@ -162,7 +195,7 @@
             background: none;
             border: none;
             color: var(--text-tertiary);
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             padding: 6px 10px;
             border-radius: var(--radius-sm);
@@ -171,7 +204,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .theme-toggle:hover {
             background: var(--accent-soft);
             color: var(--text-primary);
@@ -190,10 +222,59 @@
             align-items: center;
             gap: 60px;
             padding: 40px 0 60px;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+            transition: background 0.3s ease;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: float 10s ease-in-out infinite reverse;
+            transition: background 0.3s ease;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -20px) scale(1.05); }
         }
 
         .hero-content {
             flex: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.7s ease forwards;
+        }
+        .hero-visual {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.7s ease 0.15s forwards;
+        }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-content .badge {
@@ -206,9 +287,8 @@
             border-radius: 30px;
             letter-spacing: 0.5px;
             margin-bottom: 16px;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-
         .hero-content h1 {
             font-size: 42px;
             font-weight: 700;
@@ -218,12 +298,10 @@
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-
         .hero-content h1 .highlight {
             color: var(--accent);
-            position: relative;
+            transition: color 0.3s ease;
         }
-
         .hero-content p {
             font-size: 17px;
             color: var(--text-secondary);
@@ -237,7 +315,6 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .hero-content .cta-group .btn-primary {
             padding: 12px 32px;
             background: var(--accent);
@@ -249,16 +326,17 @@
             cursor: pointer;
             font-family: inherit;
             transition: var(--transition);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-
         .hero-content .cta-group .btn-primary:hover {
             background: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
-
         .hero-content .cta-group .btn-outline {
             padding: 12px 32px;
             background: transparent;
@@ -272,7 +350,6 @@
             transition: var(--transition);
             text-decoration: none;
         }
-
         .hero-content .cta-group .btn-outline:hover {
             border-color: var(--accent);
             color: var(--accent);
@@ -285,7 +362,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .hero-visual .visual-box {
             width: 100%;
             max-width: 420px;
@@ -302,26 +378,29 @@
             border: 1px solid var(--border-light);
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
         .hero-visual .visual-box .big-icon {
-            font-size: 72px;
-            margin-bottom: 12px;
+            font-size: 60px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            animation: bob 3s ease-in-out infinite;
+            transition: color 0.3s ease;
         }
-
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
         .hero-visual .visual-box .visual-title {
             font-size: 20px;
             font-weight: 600;
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-
         .hero-visual .visual-box .visual-desc {
             font-size: 14px;
             color: var(--text-tertiary);
             margin-top: 4px;
             transition: color 0.3s ease;
         }
-
         .hero-visual .visual-box .visual-stats {
             display: flex;
             gap: 32px;
@@ -330,23 +409,24 @@
             border-top: 1px solid var(--border-light);
             transition: border-color 0.3s ease;
         }
-
         .hero-visual .visual-box .visual-stats .stat-item {
             text-align: center;
         }
-
         .hero-visual .visual-box .visual-stats .stat-item .num {
             font-size: 24px;
             font-weight: 700;
             color: var(--accent);
+            transition: color 0.3s ease;
         }
-
+        .hero-visual .visual-box .visual-stats .stat-item .num i {
+            font-size: 22px;
+        }
         .hero-visual .visual-box .visual-stats .stat-item .label {
             font-size: 12px;
             color: var(--text-tertiary);
         }
 
-        /* ===== 功能卡片区 ===== */
+        /* ===== 通用 Section ===== */
         .section-title {
             font-size: 28px;
             font-weight: 700;
@@ -356,7 +436,6 @@
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-
         .section-sub {
             text-align: center;
             color: var(--text-tertiary);
@@ -365,12 +444,94 @@
             transition: color 0.3s ease;
         }
 
+        /* 滚动淡入 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .reveal-delay-5 { transition-delay: 0.4s; }
+        .reveal-delay-6 { transition-delay: 0.48s; }
+
+        /* ===== 快速上手 ===== */
+        .quick-start-section {
+            margin-top: 20px;
+            margin-bottom: 64px;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            position: relative;
+        }
+        .step-card {
+            background: var(--surface);
+            padding: 32px 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: transparent;
+        }
+        .step-card .step-number {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+        .step-card .step-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: block;
+            color: var(--accent);
+            transition: color 0.3s ease;
+        }
+        .step-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .step-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== 功能卡片区 ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 24px;
         }
-
         .feature-card {
             background: var(--surface);
             padding: 28px 24px;
@@ -378,20 +539,45 @@
             border: 1px solid var(--border-light);
             box-shadow: var(--card-shadow);
             transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
         .feature-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-md);
             border-color: transparent;
         }
-
         .feature-card .icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-            display: block;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
         }
-
+        .feature-card:hover .icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
         .feature-card h3 {
             font-size: 17px;
             font-weight: 600;
@@ -399,7 +585,6 @@
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-
         .feature-card p {
             font-size: 14px;
             color: var(--text-secondary);
@@ -414,14 +599,12 @@
             border-top: 1px solid var(--border-light);
             transition: border-color 0.3s ease;
         }
-
         .tech-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 16px;
         }
-
         .tech-tag {
             background: var(--surface);
             border: 1px solid var(--border-light);
@@ -430,16 +613,15 @@
             font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
             cursor: default;
         }
-
         .tech-tag:hover {
             border-color: var(--accent);
             color: var(--accent);
             background: var(--accent-soft);
+            transform: translateY(-2px);
         }
-
         .tech-tag .dot {
             display: inline-block;
             width: 8px;
@@ -447,21 +629,76 @@
             border-radius: 50%;
             margin-right: 8px;
         }
+        .tech-tag .dot.blue { background: var(--accent); }
+        .tech-tag .dot.green { background: #22c55e; }
+        .tech-tag .dot.purple { background: #8b5cf6; }
+        .tech-tag .dot.orange { background: #f59e0b; }
+        .tech-tag .dot.gray { background: var(--text-tertiary); }
 
-        .tech-tag .dot.blue {
-            background: var(--accent);
+        /* ===== QQ 提示 ===== */
+        .qq-tip {
+            margin-top: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--card-shadow);
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
         }
-        .tech-tag .dot.green {
-            background: #22c55e;
+        .qq-tip:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
-        .tech-tag .dot.purple {
-            background: #8b5cf6;
+        .qq-tip .qq-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #12B7F5, #0e9bd8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(18, 183, 245, 0.3);
         }
-        .tech-tag .dot.orange {
-            background: #f59e0b;
+        .qq-tip .qq-content {
+            flex: 1;
         }
-        .tech-tag .dot.gray {
-            background: var(--text-tertiary);
+        .qq-tip .qq-content .qq-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+        .qq-tip .qq-content .qq-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .qq-tip .qq-action {
+            padding: 9px 20px;
+            background: #12B7F5;
+            color: white !important;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(18, 183, 245, 0.25);
+            flex-shrink: 0;
+        }
+        .qq-tip .qq-action:hover {
+            background: #0e9bd8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(18, 183, 245, 0.35);
         }
 
         /* ===== 底部（主页专用） ===== */
@@ -471,8 +708,6 @@
             border-top: 1px solid var(--border-light);
             transition: border-color 0.3s ease;
         }
-
-        /* 第一行：版权 + 右侧导航 */
         .footer-home .footer-main {
             display: flex;
             justify-content: space-between;
@@ -482,27 +717,23 @@
             font-size: 13px;
             color: var(--text-tertiary);
         }
-
         .footer-home .footer-left {
             display: flex;
             align-items: center;
             gap: 6px;
             flex-wrap: wrap;
         }
-
         .footer-home .footer-left .brand-name {
             font-weight: 500;
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-
         .footer-home .footer-right {
             display: flex;
             align-items: center;
             gap: 16px;
             flex-wrap: wrap;
         }
-
         .footer-home .footer-right a {
             color: var(--text-tertiary);
             text-decoration: none;
@@ -512,11 +743,9 @@
             align-items: center;
             gap: 6px;
         }
-
         .footer-home .footer-right a:hover {
             color: var(--accent);
         }
-
         .footer-home .footer-right .qq-link {
             color: var(--text-tertiary);
             text-decoration: none;
@@ -526,16 +755,12 @@
             align-items: center;
             gap: 6px;
         }
-
         .footer-home .footer-right .qq-link:hover {
             color: #12B7F5;
         }
-
         .footer-home .footer-right .qq-link i {
-            font-size: 18px;
+            font-size: 16px;
         }
-
-        /* 第二行：许可证（左） + ICP备案（中） */
         .footer-home .footer-bottom {
             margin-top: 14px;
             padding-top: 14px;
@@ -549,42 +774,69 @@
             color: var(--text-tertiary);
             transition: border-color 0.3s ease;
         }
-
         .footer-home .footer-bottom .license-text {
             flex: 1;
             text-align: left;
             min-width: 200px;
         }
-
         .footer-home .footer-bottom .license-text a {
             color: var(--text-tertiary);
             text-decoration: none;
             transition: var(--transition);
         }
-
         .footer-home .footer-bottom .license-text a:hover {
             color: var(--accent);
         }
-
         .footer-home .footer-bottom .icp-center {
             flex: 1;
             text-align: center;
             min-width: 200px;
         }
-
         .footer-home .footer-bottom .icp-center a {
             color: var(--text-tertiary);
             text-decoration: none;
             transition: var(--transition);
         }
-
         .footer-home .footer-bottom .icp-center a:hover {
             color: var(--accent);
         }
-
         .footer-home .footer-bottom .footer-spacer {
             flex: 1;
             min-width: 200px;
+        }
+
+        /* ===== 回到顶部按钮 ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 40;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* ===== 响应式 ===== */
@@ -594,29 +846,27 @@
                 gap: 32px;
                 padding: 20px 0 40px;
             }
-
             .hero-content {
                 text-align: center;
             }
-
             .hero-content p {
                 max-width: 100%;
                 margin-left: auto;
                 margin-right: auto;
             }
-
             .hero-content .cta-group {
                 justify-content: center;
             }
-
             .hero-visual .visual-box {
                 max-width: 100%;
             }
-
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
             .navbar {
                 padding: 0 20px;
             }
-
             .navbar .logo-text {
                 font-size: 16px;
             }
@@ -626,38 +876,31 @@
             .hero-content h1 {
                 font-size: 30px;
             }
-
             .navbar .nav-right a:not(.btn-enter):not(.theme-toggle) {
                 display: none;
             }
-
-            .features-grid {
+            .features-grid,
+            .steps-grid {
                 grid-template-columns: 1fr;
             }
-
             .footer-home .footer-main {
                 flex-direction: column;
                 text-align: center;
             }
-
             .hero-visual .visual-box .visual-stats {
                 gap: 20px;
             }
-
             .footer-home .footer-right {
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
             .navbar .nav-right {
                 gap: 8px;
             }
-
             .footer-home .footer-bottom {
                 flex-direction: column;
                 gap: 6px;
             }
-
             .footer-home .footer-bottom .license-text,
             .footer-home .footer-bottom .icp-center,
             .footer-home .footer-bottom .footer-spacer {
@@ -665,25 +908,40 @@
                 min-width: auto;
                 flex: none;
             }
+            .qq-tip {
+                flex-direction: column;
+                text-align: center;
+            }
+            .qq-tip .qq-action {
+                width: 100%;
+                justify-content: center;
+            }
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- ===== 导航栏 ===== -->
-    <header class="navbar">
+    <header class="navbar" id="navbar">
         <a href="index.html" class="logo">
             <img src="index.jpg" alt="Logo" onerror="this.style.display='none';this.parentElement.querySelector('.logo-placeholder').style.display='flex'">
-            <span class="logo-placeholder" style="display:none;">🐢</span>
+            <span class="logo-placeholder" style="display:none;"><i class="fas fa-folder-open"></i></span>
             <span class="logo-text">乌龟<span>数据管理</span></span>
         </a>
         <div class="nav-right">
+            <a href="#quick-start">快速上手</a>
             <a href="#features">功能</a>
             <a href="#tech">技术栈</a>
             <button class="theme-toggle" id="themeToggle" title="切换深色模式">
                 <i class="fas fa-moon"></i>
             </button>
-            <a href="admin.html" class="btn-enter">进入后台 →</a>
+            <a href="admin.html" class="btn-enter">进入后台 <i class="fas fa-arrow-right"></i></a>
         </div>
     </header>
 
@@ -693,7 +951,7 @@
         <!-- ===== Hero ===== -->
         <section class="hero">
             <div class="hero-content">
-                <div class="badge">🐢 开源 · 本地优先</div>
+                <div class="badge">本地优先 · 隐私安全</div>
                 <h1>
                     乌龟养殖<br>
                     <span class="highlight">生长记录系统</span>
@@ -703,26 +961,26 @@
                     所有数据存储在浏览器本地，无需联网，隐私安全。
                 </p>
                 <div class="cta-group">
-                    <a href="admin.html" class="btn-primary">🚀 立即使用</a>
-                    <a href="#features" class="btn-outline">了解更多</a>
+                    <a href="admin.html" class="btn-primary"><i class="fas fa-rocket"></i> 立即使用</a>
+                    <a href="#quick-start" class="btn-outline">了解更多</a>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="visual-box">
-                    <div class="big-icon">🐢</div>
+                    <div class="big-icon"><i class="fas fa-folder-open"></i></div>
                     <div class="visual-title">数据驱动养殖</div>
                     <div class="visual-desc">科学记录 · 精准管理</div>
                     <div class="visual-stats">
                         <div class="stat-item">
-                            <div class="num">∞</div>
+                            <div class="num"><i class="fas fa-infinity"></i></div>
                             <div class="label">无限个体</div>
                         </div>
                         <div class="stat-item">
-                            <div class="num">📊</div>
+                            <div class="num"><i class="fas fa-chart-line"></i></div>
                             <div class="label">生长曲线</div>
                         </div>
                         <div class="stat-item">
-                            <div class="num">🏷️</div>
+                            <div class="num"><i class="fas fa-tags"></i></div>
                             <div class="label">标签分类</div>
                         </div>
                     </div>
@@ -730,38 +988,64 @@
             </div>
         </section>
 
+        <!-- ===== 快速上手 ===== -->
+        <section id="quick-start" class="quick-start-section">
+            <h2 class="section-title reveal">三步开始记录</h2>
+            <p class="section-sub reveal reveal-delay-1">简单操作，快速上手</p>
+            <div class="steps-grid">
+                <div class="step-card reveal reveal-delay-1">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-plus-circle step-icon"></i>
+                    <h3>添加乌龟</h3>
+                    <p>录入每只乌龟的编号、品种、性别等基础信息，建立个体档案。</p>
+                </div>
+                <div class="step-card reveal reveal-delay-2">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-pen-to-square step-icon"></i>
+                    <h3>记录数据</h3>
+                    <p>定期测量体重、背甲长等数据，支持备注每次测量的情况。</p>
+                </div>
+                <div class="step-card reveal reveal-delay-3">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-chart-line step-icon"></i>
+                    <h3>查看曲线</h3>
+                    <p>自动生成生长曲线，直观掌握每只乌龟的生长趋势。</p>
+                </div>
+            </div>
+        </section>
+
         <!-- ===== 功能 ===== -->
         <section id="features">
-            <h2 class="section-title">核心功能</h2>
-            <p class="section-sub">专为乌龟养殖爱好者设计的轻量级数据管理工具</p>
+            <h2 class="section-title reveal">核心功能</h2>
+            <p class="section-sub reveal reveal-delay-1">专为乌龟养殖爱好者设计的轻量级数据管理工具</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <span class="icon">📝</span>
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="icon"><i class="fas fa-clipboard-list"></i></div>
                     <h3>生长记录</h3>
                     <p>记录体重、背甲长、背甲宽，支持备注与日期，形成完整的生长档案。</p>
                 </div>
-                <div class="feature-card">
-                    <span class="icon">🐢</span>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="icon"><i class="fas fa-folder-open"></i></div>
                     <h3>乌龟档案</h3>
                     <p>管理每只乌龟的编号、昵称、品种、性别、购入时间、饲养位置等信息。</p>
                 </div>
-                <div class="feature-card">
-                    <span class="icon">🏷️</span>
+                <div class="feature-card reveal reveal-delay-3">
+                    <div class="icon"><i class="fas fa-tags"></i></div>
                     <h3>标签分类</h3>
                     <p>自由创建标签，批量添加给多只乌龟，支持按标签快速筛选查看。</p>
                 </div>
-                <div class="feature-card">
-                    <span class="icon">📈</span>
+                <div class="feature-card reveal reveal-delay-4">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
                     <h3>生长曲线</h3>
                     <p>自动生成个体生长曲线图，体重与背甲长双轴对比，趋势一目了然。</p>
                 </div>
-                <div class="feature-card">
-                    <span class="icon">💾</span>
+                <div class="feature-card reveal reveal-delay-5">
+                    <div class="icon"><i class="fas fa-database"></i></div>
                     <h3>数据备份与恢复</h3>
                     <p>一键导出 JSON 备份文件，支持导入恢复，数据安全有保障。</p>
                 </div>
-                <div class="feature-card">
-                    <span class="icon">📱</span>
+                <div class="feature-card reveal reveal-delay-6">
+                    <div class="icon"><i class="fas fa-mobile-screen"></i></div>
                     <h3>响应式设计</h3>
                     <p>电脑、平板、手机全适配，随时随地查看和记录乌龟数据。</p>
                 </div>
@@ -770,26 +1054,39 @@
 
         <!-- ===== 技术栈 ===== -->
         <section id="tech" class="tech-section">
-            <h2 class="section-title" style="font-size:22px;">技术栈</h2>
-            <p class="section-sub" style="font-size:14px;margin-bottom:28px;">纯粹的前端技术，无需服务器，开箱即用</p>
+            <h2 class="section-title reveal" style="font-size:22px;">技术栈</h2>
+            <p class="section-sub reveal reveal-delay-1" style="font-size:14px;margin-bottom:28px;">纯粹的前端技术，无需服务器，开箱即用</p>
             <div class="tech-grid">
-                <span class="tech-tag"><span class="dot blue"></span>HTML5</span>
-                <span class="tech-tag"><span class="dot blue"></span>CSS3</span>
-                <span class="tech-tag"><span class="dot orange"></span>JavaScript (ES6+)</span>
-                <span class="tech-tag"><span class="dot purple"></span>Vue 3</span>
-                <span class="tech-tag"><span class="dot green"></span>Chart.js</span>
-                <span class="tech-tag"><span class="dot gray"></span>IndexedDB</span>
-                <span class="tech-tag"><span class="dot gray"></span>LocalStorage</span>
-                <span class="tech-tag"><span class="dot gray"></span>响应式设计</span>
+                <span class="tech-tag reveal reveal-delay-1"><span class="dot blue"></span>HTML5</span>
+                <span class="tech-tag reveal reveal-delay-1"><span class="dot blue"></span>CSS3</span>
+                <span class="tech-tag reveal reveal-delay-2"><span class="dot orange"></span>JavaScript (ES6+)</span>
+                <span class="tech-tag reveal reveal-delay-2"><span class="dot purple"></span>Vue 3</span>
+                <span class="tech-tag reveal reveal-delay-3"><span class="dot green"></span>Chart.js</span>
+                <span class="tech-tag reveal reveal-delay-3"><span class="dot gray"></span>IndexedDB</span>
+                <span class="tech-tag reveal reveal-delay-4"><span class="dot gray"></span>LocalStorage</span>
+                <span class="tech-tag reveal reveal-delay-4"><span class="dot gray"></span>响应式设计</span>
             </div>
-            <div style="text-align:center;margin-top:24px;font-size:13px;color:var(--text-tertiary);">
-                所有数据存储在浏览器本地，无需联网，隐私安全 🔒
+            <div class="reveal reveal-delay-5" style="text-align:center;margin-top:24px;font-size:13px;color:var(--text-tertiary);">
+                所有数据存储在浏览器本地，无需联网，隐私安全 <i class="fas fa-lock"></i>
+            </div>
+
+            <!-- QQ 提示 -->
+            <div class="qq-tip reveal reveal-delay-5">
+                <div class="qq-icon">
+                    <i class="fab fa-qq"></i>
+                </div>
+                <div class="qq-content">
+                    <div class="qq-title">遇到问题？</div>
+                    <div class="qq-desc">使用过程中有任何问题或建议，欢迎通过 QQ 联系我</div>
+                </div>
+                <a href="https://qm.qq.com/q/QxePeoPZ2A" target="_blank" rel="noopener" class="qq-action">
+                    <i class="fab fa-qq"></i> 联系我
+                </a>
             </div>
         </section>
 
         <!-- ===== 底部（主页） ===== -->
         <footer class="footer-home">
-            <!-- 第一行：版权 + 右侧导航 -->
             <div class="footer-main">
                 <div class="footer-left">
                     <span>Copyright © 2026</span>
@@ -800,12 +1097,11 @@
                     <a href="admin.html">后台管理</a>
                     <a href="#features">功能</a>
                     <a href="#tech">技术栈</a>
-                    <a href="https://qm.qq.com/q/QxePeoPZ2A" target="_blank" class="qq-link" title="联系我">
+                    <a href="https://qm.qq.com/q/QxePeoPZ2A" target="_blank" rel="noopener" class="qq-link" title="联系我">
                         <i class="fab fa-qq"></i> QQ联系
                     </a>
                 </div>
             </div>
-            <!-- 第二行：许可证（左） + ICP备案（中） -->
             <div class="footer-bottom">
                 <div class="license-text">
                     <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans" target="_blank" rel="noopener">本项目采用 CC BY-NC 4.0 许可协议 · 禁止商业用途</a>
@@ -819,50 +1115,67 @@
 
     </main>
 
+    <!-- 回到顶部 -->
+    <button class="back-to-top" id="backToTop" title="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        // ===== 深色模式切换 =====
         (function() {
-            const STORAGE_KEY = 'turtle_farm_home_theme';
-            const themeToggle = document.getElementById('themeToggle');
-            const icon = themeToggle.querySelector('i');
+            // ===== 统一 key（跟后台共用） =====
+            const THEME_COLOR_KEY = 'turtle_farm_theme_color';
+            const THEME_MODE_KEY = 'turtle_farm_theme';  // light / dark
 
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem(STORAGE_KEY);
-
-            let isDark = false;
-            if (savedTheme === 'dark') {
-                isDark = true;
-            } else if (savedTheme === 'light') {
-                isDark = false;
-            } else {
-                isDark = prefersDark;
+            // ===== 应用主题色 =====
+            function applyThemeColor(theme) {
+                const color = theme || 'blue';
+                document.body.setAttribute('data-theme', color);
             }
 
-            function applyTheme(dark) {
-                if (dark) {
+            // ===== 应用深色模式 =====
+            const themeToggle = document.getElementById('themeToggle');
+            const toggleIcon = themeToggle.querySelector('i');
+
+            function applyThemeMode(mode) {
+                const isDark = mode === 'dark';
+                if (isDark) {
                     document.body.classList.add('dark-mode');
-                    icon.className = 'fas fa-sun';
+                    toggleIcon.className = 'fas fa-sun';
                 } else {
                     document.body.classList.remove('dark-mode');
-                    icon.className = 'fas fa-moon';
+                    toggleIcon.className = 'fas fa-moon';
                 }
-                isDark = dark;
-                localStorage.setItem(STORAGE_KEY, dark ? 'dark' : 'light');
             }
 
-            applyTheme(isDark);
+            // ===== 初始化 =====
+            const savedColor = localStorage.getItem(THEME_COLOR_KEY) || 'blue';
+            applyThemeColor(savedColor);
 
+            let savedMode = localStorage.getItem(THEME_MODE_KEY);
+            if (!savedMode) {
+                savedMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            applyThemeMode(savedMode);
+
+            // ===== 点击切换深色模式 =====
             themeToggle.addEventListener('click', function() {
-                applyTheme(!isDark);
+                const currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+                const newMode = currentMode === 'dark' ? 'light' : 'dark';
+                applyThemeMode(newMode);
+                localStorage.setItem(THEME_MODE_KEY, newMode);
             });
 
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-                if (!localStorage.getItem(STORAGE_KEY)) {
-                    applyTheme(e.matches);
+            // ===== 跨标签页实时同步 =====
+            // storage 事件只在其他标签页修改 localStorage 时触发
+            window.addEventListener('storage', function(e) {
+                if (e.key === THEME_COLOR_KEY) {
+                    applyThemeColor(e.newValue || 'blue');
+                } else if (e.key === THEME_MODE_KEY) {
+                    applyThemeMode(e.newValue || 'light');
                 }
             });
 
-            // Logo 加载失败处理
+            // ===== Logo 加载失败处理 =====
             const logoImg = document.querySelector('.logo img');
             if (logoImg) {
                 logoImg.addEventListener('error', function() {
@@ -873,6 +1186,73 @@
                     }
                 });
             }
+
+            // ===== 导航栏滚动阴影 =====
+            const navbar = document.getElementById('navbar');
+            function handleNavScroll() {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', handleNavScroll, { passive: true });
+            handleNavScroll();
+
+            // ===== 回到顶部按钮 =====
+            const backToTop = document.getElementById('backToTop');
+            function handleBackToTop() {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            }
+            window.addEventListener('scroll', handleBackToTop, { passive: true });
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ===== 滚动淡入 =====
+            const revealElements = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                revealElements.forEach(function(el) {
+                    observer.observe(el);
+                });
+            } else {
+                revealElements.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }
+
+            // ===== 平滑滚动 =====
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const navHeight = 68;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         })();
     </script>
 

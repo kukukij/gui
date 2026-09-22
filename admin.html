@@ -196,7 +196,7 @@
             display: block;
         }
         .sidebar-brand .brand-logo .logo-placeholder {
-            font-size: 22px;
+            font-size: 20px;
             color: var(--accent);
         }
         .sidebar-brand h1 {
@@ -245,10 +245,10 @@
             font-weight: 600;
         }
         .nav-icon {
-            font-size: 18px;
+            font-size: 16px;
             width: 24px;
             text-align: center;
-            opacity: 0.8;
+            opacity: 0.85;
         }
         .sidebar-bottom {
             margin-top: auto;
@@ -267,7 +267,7 @@
             background: none;
             border: none;
             color: var(--text-tertiary);
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             padding: 4px 8px;
             border-radius: var(--radius-sm);
@@ -329,7 +329,7 @@
             background: none;
             border: none;
             color: var(--text-tertiary);
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             padding: 4px 8px;
             border-radius: var(--radius-sm);
@@ -342,7 +342,7 @@
         .mobile-header .mobile-home-link {
             color: var(--text-tertiary);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 15px;
             padding: 4px 8px;
             border-radius: var(--radius-sm);
             transition: var(--transition);
@@ -400,6 +400,9 @@
             color: var(--text-secondary);
             border: 1px solid var(--border-light);
             box-shadow: var(--shadow-sm);
+        }
+        .btn i {
+            font-size: 12px;
         }
         .btn-primary {
             background: var(--accent);
@@ -486,6 +489,12 @@
             font-family: inherit;
             background: var(--surface);
             color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .batch-actions .btn-batch i {
+            font-size: 11px;
         }
         .batch-actions .btn-batch:hover {
             background: var(--surface-hover);
@@ -549,7 +558,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
         }
         .stat-value {
             font-size: 30px;
@@ -588,7 +597,7 @@
             border-bottom: 1px solid var(--border-light);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .card-title::before {
             content: '';
@@ -596,6 +605,22 @@
             height: 18px;
             background: var(--accent);
             border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .card-title i {
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+        .card-title .title-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .card-title .title-actions .count-info {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 400;
         }
 
         .data-warning {
@@ -614,10 +639,11 @@
             border-color: #854d0e;
         }
         .data-warning .warning-icon {
-            font-size: 24px;
+            font-size: 22px;
             color: #f59e0b;
             flex-shrink: 0;
             line-height: 1.2;
+            margin-top: 2px;
         }
         .data-warning .warning-content {
             flex: 1;
@@ -853,6 +879,7 @@
             margin-right: 6px;
             display: flex;
             align-items: center;
+            gap: 4px;
         }
         .tag-filter-chip {
             background: var(--surface);
@@ -893,13 +920,18 @@
         }
 
         .badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             padding: 2px 12px;
             border-radius: 30px;
             font-size: 11px;
             font-weight: 500;
             background: var(--border-light);
             color: var(--text-secondary);
+        }
+        .badge i {
+            font-size: 10px;
         }
         .badge-male {
             background: #dbeafe;
@@ -944,7 +976,7 @@
             border: none;
             color: var(--text-tertiary);
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             padding: 4px 6px;
             border-radius: 50%;
             transition: var(--transition);
@@ -1005,6 +1037,216 @@
             height: 260px;
         }
 
+        /* ===== 图库 ===== */
+        .gallery-drop-zone {
+            border: 2px dashed var(--border-medium);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg);
+            margin-bottom: 16px;
+        }
+        .gallery-drop-zone:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .gallery-drop-zone.dragover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            transform: scale(1.01);
+        }
+        .gallery-drop-zone .drop-icon {
+            font-size: 28px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+        .gallery-drop-zone:hover .drop-icon,
+        .gallery-drop-zone.dragover .drop-icon {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+        .gallery-drop-zone .drop-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .gallery-drop-zone .drop-hint {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: var(--bg);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: var(--transition);
+            group: gallery;
+        }
+        .gallery-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item .gallery-delete {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.7);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            opacity: 0;
+            transition: var(--transition);
+            backdrop-filter: blur(4px);
+        }
+        .gallery-item:hover .gallery-delete {
+            opacity: 1;
+        }
+        .gallery-item .gallery-delete:hover {
+            background: var(--danger);
+            transform: scale(1.1);
+        }
+
+        .gallery-empty {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
+
+        /* ===== 灯箱 ===== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInLightbox 0.2s ease;
+        }
+        .lightbox-overlay.show {
+            display: flex;
+        }
+        @keyframes fadeInLightbox {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-content img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.25s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+        }
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .lightbox-prev {
+            left: -60px;
+        }
+        .lightbox-next {
+            right: -60px;
+        }
+        .lightbox-counter {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
         .empty-state {
             text-align: center;
             padding: 48px 20px;
@@ -1019,7 +1261,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
+            color: var(--text-tertiary);
         }
         .empty-state p {
             margin-bottom: 16px;
@@ -1064,6 +1307,16 @@
         .modal-title {
             font-size: 17px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-title i {
+            font-size: 16px;
+            color: var(--text-tertiary);
+        }
+        .modal-title.danger-title i {
+            color: var(--danger);
         }
         .modal-close {
             background: none;
@@ -1149,6 +1402,17 @@
             padding: 0 8px;
             border-radius: 12px;
             font-size: 10px;
+        }
+        .modal-hint {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .modal-hint i {
+            font-size: 11px;
         }
 
         .confirm-modal .modal {
@@ -1337,6 +1601,47 @@
             }
         }
 
+        /* 导入拖拽区 */
+        .import-drop-zone {
+            border: 2px dashed var(--border-medium);
+            border-radius: var(--radius-sm);
+            padding: 28px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg);
+        }
+        .import-drop-zone:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .import-drop-zone.dragover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            transform: scale(1.01);
+        }
+        .import-drop-zone .drop-icon {
+            font-size: 32px;
+            color: var(--text-tertiary);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        .import-drop-zone:hover .drop-icon,
+        .import-drop-zone.dragover .drop-icon {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+        .import-drop-zone .drop-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .import-drop-zone .drop-hint {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
         @media (max-width: 820px) {
             .sidebar {
                 width: 100%;
@@ -1385,7 +1690,7 @@
                 color: var(--accent);
             }
             .nav-icon {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .mobile-header {
@@ -1425,6 +1730,11 @@
             .stat-value {
                 font-size: 24px;
             }
+            .stat-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
             .card {
                 padding: 18px 16px;
                 border-radius: var(--radius-sm);
@@ -1432,6 +1742,7 @@
             .card-title {
                 font-size: 14px;
                 margin-bottom: 14px;
+                flex-wrap: wrap;
             }
             .form-row {
                 grid-template-columns: 1fr;
@@ -1543,6 +1854,32 @@
                 width: 38px;
                 height: 38px;
             }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 8px;
+            }
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+            }
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            .lightbox-prev {
+                left: 10px;
+            }
+            .lightbox-next {
+                right: 10px;
+            }
+            .lightbox-counter {
+                bottom: 10px;
+            }
+            .lightbox-content img {
+                max-width: 95vw;
+                max-height: 80vh;
+            }
         }
         @media (max-width: 420px) {
             .stats-grid {
@@ -1556,9 +1893,9 @@
                 font-size: 20px;
             }
             .stat-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 15px;
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
             }
             .main {
                 padding: 0 12px 76px;
@@ -1579,6 +1916,10 @@
             }
             .batch-actions {
                 flex-wrap: wrap;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 6px;
             }
         }
         .link-btn {
@@ -1630,7 +1971,7 @@
                 <div v-for="item in navItems" :key="item.page"
                 class="nav-item" :class="{ active: currentPage === item.page }"
                 @click="navigate(item.page)">
-                <span class="nav-icon">{{ item.icon }}</span>
+                <i class="nav-icon" :class="item.icon"></i>
                 <span>{{ item.label }}</span>
             </div>
         </nav>
@@ -1649,7 +1990,7 @@
         </a>
         <div class="mobile-actions">
             <a href="index.html" class="mobile-home-link" title="回主页">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-house"></i>
             </a>
             <button class="mobile-theme-toggle" @click="toggleTheme" :title="isDarkMode ? '切换到亮色模式' : '切换到深色模式'">
                 <i :class="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
@@ -1668,36 +2009,48 @@
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-top"><span class="stat-label">乌龟总数</span><span class="stat-icon">🐢</span></div>
+                    <div class="stat-top">
+                        <span class="stat-label">乌龟总数</span>
+                        <span class="stat-icon"><i class="fas fa-folder-open"></i></span>
+                    </div>
                     <div class="stat-value">{{ turtles.length }}<span class="unit">只</span></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-top"><span class="stat-label">生长记录</span><span class="stat-icon">📊</span></div>
+                    <div class="stat-top">
+                        <span class="stat-label">生长记录</span>
+                        <span class="stat-icon"><i class="fas fa-chart-line"></i></span>
+                    </div>
                     <div class="stat-value">{{ records.length }}<span class="unit">条</span></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-top"><span class="stat-label">本月新增</span><span class="stat-icon">📈</span></div>
+                    <div class="stat-top">
+                        <span class="stat-label">本月新增</span>
+                        <span class="stat-icon"><i class="fas fa-arrow-trend-up"></i></span>
+                    </div>
                     <div class="stat-value">{{ thisMonthCount }}<span class="unit">条</span></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-top"><span class="stat-label">平均增重</span><span class="stat-icon">⚖️</span></div>
+                    <div class="stat-top">
+                        <span class="stat-label">平均增重</span>
+                        <span class="stat-icon"><i class="fas fa-weight-scale"></i></span>
+                    </div>
                     <div class="stat-value">{{ avgGrowth }}<span class="unit">g</span></div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-title">总体重趋势</div>
+                <div class="card-title"><i class="fas fa-chart-line"></i> 总体重趋势</div>
                 <div v-if="records.length === 0" class="empty-state">
-                    <div class="icon-wrap">📊</div>
+                    <div class="icon-wrap"><i class="fas fa-chart-line"></i></div>
                     <p>暂无数据</p>
                 </div>
                 <div v-else class="chart-container"><canvas ref="weightChart"></canvas></div>
             </div>
             <div class="card">
-                <div class="card-title">最近记录</div>
+                <div class="card-title"><i class="fas fa-clock-rotate-left"></i> 最近记录</div>
                 <div v-if="records.length === 0" class="empty-state">
-                    <div class="icon-wrap">📝</div>
+                    <div class="icon-wrap"><i class="fas fa-clipboard-list"></i></div>
                     <p>还没有生长记录</p>
-                    <button class="btn btn-primary" @click="openRecordModal()">添加第一条</button>
+                    <button class="btn btn-primary" @click="openRecordModal()"><i class="fas fa-plus"></i> 添加第一条</button>
                 </div>
                 <div v-else class="table-wrap">
                     <table>
@@ -1724,33 +2077,33 @@
                     <div class="page-subtitle">管理个体 · 标签分类</div>
                 </div>
                 <div class="header-actions">
-                    <button class="btn btn-secondary" @click="openTagModal()">🏷️ 添加标签</button>
-                    <button class="btn btn-primary" @click="openTurtleModal()">+ 添加乌龟</button>
+                    <button class="btn btn-secondary" @click="openTagModal()"><i class="fas fa-tags"></i> 添加标签</button>
+                    <button class="btn btn-primary" @click="openTurtleModal()"><i class="fas fa-plus"></i> 添加乌龟</button>
                 </div>
             </div>
             <div class="card">
                 <div class="search-bar">
                     <div class="search-wrapper">
                         <input class="search-input" v-model="turtleSearch" placeholder="搜索编号、昵称、品种或标签">
-                        <button class="search-clear" v-if="turtleSearch" @click="turtleSearch = ''">✕</button>
+                        <button class="search-clear" v-if="turtleSearch" @click="turtleSearch = ''"><i class="fas fa-xmark"></i></button>
                     </div>
                     <span class="count-badge">{{ filteredTurtles.length }} 只</span>
                     <div class="batch-actions">
                         <span class="batch-count" v-if="selectedTurtleIds.length > 0">已选 {{ selectedTurtleIds.length }}</span>
-                        <button class="btn-batch delete" @click="confirmBatchDelete" :disabled="selectedTurtleIds.length === 0">🗑️ 删除选中</button>
-                        <button class="btn-batch" @click="clearSelection" :disabled="selectedTurtleIds.length === 0">取消选择</button>
+                        <button class="btn-batch delete" @click="confirmBatchDelete" :disabled="selectedTurtleIds.length === 0"><i class="fas fa-trash"></i> 删除选中</button>
+                        <button class="btn-batch" @click="clearSelection" :disabled="selectedTurtleIds.length === 0"><i class="fas fa-xmark"></i> 取消选择</button>
                     </div>
                 </div>
                 <div class="tag-filter-bar" v-if="allTags.length > 0">
-                    <span class="filter-label">🏷️ 筛选</span>
+                    <span class="filter-label"><i class="fas fa-filter"></i> 筛选</span>
                     <span class="tag-filter-chip" :class="{ active: selectedTag === '' }" @click="selectedTag = ''">全部</span>
                     <span v-for="tag in allTags" :key="tag"
                     class="tag-filter-chip" :class="{ active: selectedTag === tag }"
                     @click="selectedTag = tag">{{ tag }}</span>
-                    <button class="tag-filter-clear" v-if="selectedTag" @click="selectedTag = ''">✕ 清除</button>
+                    <button class="tag-filter-clear" v-if="selectedTag" @click="selectedTag = ''"><i class="fas fa-xmark"></i> 清除</button>
                 </div>
                 <div v-if="filteredTurtles.length === 0" class="empty-state">
-                    <div class="icon-wrap">🐢</div>
+                    <div class="icon-wrap"><i class="fas fa-folder-open"></i></div>
                     <p>没有匹配的乌龟</p>
                 </div>
                 <div v-else class="table-wrap">
@@ -1781,12 +2134,16 @@
                                 <td><strong>{{ t.code }}</strong></td>
                                 <td>{{ t.name || '-' }}</td>
                                 <td>{{ t.species }}</td>
-                                <td><span class="badge" :class="genderClass(t.gender)">{{ t.gender || '未知' }}</span></td>
+                                <td>
+                                    <span class="badge" :class="genderClass(t.gender)">
+                                        <i :class="genderIcon(t.gender)"></i> {{ t.gender || '未知' }}
+                                    </span>
+                                </td>
                                 <td>
                                     <div class="tag-group">
                                         <span v-for="tag in (t.tags || [])" :key="tag" class="tag" @click="selectedTag = tag">
                                             {{ tag }}
-                                            <span class="remove-tag" @click.stop="removeTag(t.id, tag)">✕</span>
+                                            <span class="remove-tag" @click.stop="removeTag(t.id, tag)"><i class="fas fa-xmark"></i></span>
                                         </span>
                                     </div>
                                     <div class="tag-input-wrap">
@@ -1814,13 +2171,15 @@
                 <div>
                     <div class="page-title">
                         {{ currentTurtle.name || currentTurtle.code }}
-                        <span class="badge" :class="genderClass(currentTurtle.gender)" style="font-size:11px;vertical-align:middle;margin-left:10px;">{{ currentTurtle.gender || '未知' }}</span>
+                        <span class="badge" :class="genderClass(currentTurtle.gender)" style="font-size:11px;vertical-align:middle;margin-left:10px;">
+                            <i :class="genderIcon(currentTurtle.gender)"></i> {{ currentTurtle.gender || '未知' }}
+                        </span>
                     </div>
                     <div class="page-subtitle">{{ currentTurtle.species }} · 编号 {{ currentTurtle.code }}</div>
                 </div>
                 <div class="header-actions">
-                    <button class="btn btn-secondary" @click="currentTurtleId = null; selectedTag = ''; clearSelection()">返回列表</button>
-                    <button class="btn btn-primary" @click="openRecordModal(currentTurtle.id)">+ 添加记录</button>
+                    <button class="btn btn-secondary" @click="currentTurtleId = null; selectedTag = ''; clearSelection()"><i class="fas fa-arrow-left"></i> 返回列表</button>
+                    <button class="btn btn-primary" @click="openRecordModal(currentTurtle.id)"><i class="fas fa-plus"></i> 添加记录</button>
                 </div>
             </div>
             <div class="card">
@@ -1839,20 +2198,69 @@
                     <span v-for="tag in (currentTurtle.tags || [])" :key="tag" class="tag">{{ tag }}</span>
                 </div>
             </div>
+
+            <!-- 图库 -->
             <div class="card">
-                <div class="card-title">生长曲线</div>
+                <div class="card-title">
+                    <i class="fas fa-images"></i> 图库
+                    <div class="title-actions">
+                        <span class="count-info">{{ currentTurtlePhotos.length }} / {{ MAX_PHOTOS }} 张</span>
+                    </div>
+                </div>
+
+                <!-- 上传区 -->
+                <div 
+                    class="gallery-drop-zone" 
+                    :class="{ dragover: isDragoverGallery }"
+                    @click="triggerFileInput"
+                    @dragover.prevent="isDragoverGallery = true"
+                    @dragleave.prevent="isDragoverGallery = false"
+                    @drop.prevent="handlePhotoDrop"
+                    v-if="currentTurtlePhotos.length < MAX_PHOTOS"
+                >
+                    <div class="drop-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+                    <div class="drop-text">点击或拖拽图片到此处上传</div>
+                    <div class="drop-hint">支持多张，剩余 {{ MAX_PHOTOS - currentTurtlePhotos.length }} 个位置</div>
+                </div>
+
+                <input 
+                    type="file" 
+                    ref="photoInput" 
+                    accept="image/*" 
+                    multiple 
+                    style="display:none"
+                    @change="handlePhotoSelect"
+                >
+
+                <!-- 图片网格 -->
+                <div v-if="currentTurtlePhotos.length > 0" class="gallery-grid">
+                    <div v-for="(photo, index) in currentTurtlePhotos" :key="photo.id" class="gallery-item">
+                        <img :src="photo.data" :alt="photo.name" @click="openLightbox(index)">
+                        <button class="gallery-delete" @click.stop="confirmDeletePhoto(photo)" title="删除">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div v-else class="gallery-empty">
+                    <i class="fas fa-image"></i> 暂无图片
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-chart-line"></i> 生长曲线</div>
                 <div v-if="currentTurtleRecords.length < 2" class="empty-state">
-                    <div class="icon-wrap">📈</div>
+                    <div class="icon-wrap"><i class="fas fa-chart-line"></i></div>
                     <p>至少需要 2 条记录</p>
                 </div>
                 <div v-else class="chart-container"><canvas ref="growthChart"></canvas></div>
             </div>
             <div class="card">
-                <div class="card-title">测量记录</div>
+                <div class="card-title"><i class="fas fa-clipboard-list"></i> 测量记录</div>
                 <div v-if="currentTurtleRecords.length === 0" class="empty-state">
-                    <div class="icon-wrap">📝</div>
+                    <div class="icon-wrap"><i class="fas fa-clipboard-list"></i></div>
                     <p>还没有测量记录</p>
-                    <button class="btn btn-primary btn-sm" @click="openRecordModal(currentTurtle.id)">添加记录</button>
+                    <button class="btn btn-primary btn-sm" @click="openRecordModal(currentTurtle.id)"><i class="fas fa-plus"></i> 添加记录</button>
                 </div>
                 <div v-else class="table-wrap">
                     <table>
@@ -1884,19 +2292,19 @@
                     <div class="page-subtitle">所有测量数据</div>
                 </div>
                 <div class="header-actions">
-                    <button class="btn btn-primary" @click="openRecordModal()">+ 添加记录</button>
+                    <button class="btn btn-primary" @click="openRecordModal()"><i class="fas fa-plus"></i> 添加记录</button>
                 </div>
             </div>
             <div class="card">
                 <div class="search-bar">
                     <div class="search-wrapper">
                         <input class="search-input" v-model="recordSearch" placeholder="搜索编号、昵称、日期或备注">
-                        <button class="search-clear" v-if="recordSearch" @click="recordSearch = ''">✕</button>
+                        <button class="search-clear" v-if="recordSearch" @click="recordSearch = ''"><i class="fas fa-xmark"></i></button>
                     </div>
                     <span class="count-badge">{{ filteredRecords.length }} 条</span>
                 </div>
                 <div v-if="filteredRecords.length === 0" class="empty-state">
-                    <div class="icon-wrap">📝</div>
+                    <div class="icon-wrap"><i class="fas fa-clipboard-list"></i></div>
                     <p>暂无记录</p>
                 </div>
                 <div v-else class="table-wrap">
@@ -1933,13 +2341,12 @@
                 </div>
             </div>
 
-            <!-- 数据管理（放前面） -->
             <div class="data-warning">
-                <div class="warning-icon">⚠️</div>
+                <div class="warning-icon"><i class="fas fa-triangle-exclamation"></i></div>
                 <div class="warning-content">
                     <div class="warning-title">数据存储在本地，请及时备份</div>
                     <div class="warning-text">
-                        所有数据都存储在您的<strong>浏览器本地</strong>，不会上传到服务器。
+                        所有数据（包括图片）都存储在您的<strong>浏览器本地</strong>，不会上传到服务器。
                         因此，<strong>更换手机、电脑或浏览器，清除浏览器数据，使用无痕模式</strong>等操作都可能导致数据丢失。
                         为防止数据丢失，<strong>强烈建议定期导出 JSON 备份文件</strong>并妥善保存。
                     </div>
@@ -1947,35 +2354,44 @@
             </div>
 
             <div class="card">
-                <div class="card-title">导出备份</div>
-                <p style="color:var(--text-secondary);margin-bottom:14px;">导出所有数据为 JSON 文件，用于永久保存或迁移。</p>
+                <div class="card-title"><i class="fas fa-download"></i> 导出备份</div>
+                <p style="color:var(--text-secondary);margin-bottom:14px;">导出所有数据（含图片）为 JSON 文件，用于永久保存或迁移。</p>
                 <button class="btn btn-primary" @click="exportData">
                     <i class="fas fa-download"></i> 导出 JSON
                 </button>
             </div>
 
             <div class="card">
-                <div class="card-title">导入备份</div>
-                <p style="color:var(--text-secondary);margin-bottom:14px;">从 JSON 文件恢复数据，将覆盖当前所有内容。</p>
-                <button class="btn btn-secondary" @click="openImportConfirm" :disabled="isImporting">
-                    <i v-if="isImporting" class="fas fa-spinner fa-spin"></i>
-                    <i v-else class="fas fa-upload"></i>
-                    {{ isImporting ? '导入中...' : '选择 JSON 文件' }}
-                </button>
+                <div class="card-title"><i class="fas fa-upload"></i> 导入备份</div>
+                <p style="color:var(--text-secondary);margin-bottom:14px;">从 JSON 文件恢复数据（含图片），将覆盖当前所有内容。</p>
+                <div 
+                    class="import-drop-zone"
+                    :class="{ dragover: isDragoverImport }"
+                    @click="openImportConfirm"
+                    @dragover.prevent="isDragoverImport = true"
+                    @dragleave.prevent="isDragoverImport = false"
+                    @drop.prevent="handleImportDrop"
+                >
+                    <div class="drop-icon">
+                        <i v-if="isImporting" class="fas fa-spinner fa-spin"></i>
+                        <i v-else class="fas fa-cloud-arrow-up"></i>
+                    </div>
+                    <div class="drop-text">{{ isImporting ? '导入中...' : '点击或拖拽 JSON 文件到此处' }}</div>
+                    <div class="drop-hint">选择之前导出的 .json 备份文件</div>
+                </div>
                 <input type="file" ref="importInput" accept=".json" style="display:none" @change="handleImportFile">
             </div>
 
             <div class="card">
-                <div class="card-title" style="color:var(--danger);">清空数据库</div>
-                <p style="color:var(--text-secondary);margin-bottom:14px;">永久删除所有数据，建议先导出备份。</p>
+                <div class="card-title" style="color:var(--danger);"><i class="fas fa-trash" style="color:var(--danger);"></i> 清空数据库</div>
+                <p style="color:var(--text-secondary);margin-bottom:14px;">永久删除所有数据（含图片），建议先导出备份。</p>
                 <button class="btn btn-danger" @click="confirmClearAll">
                     <i class="fas fa-trash"></i> 清空所有数据
                 </button>
             </div>
 
-            <!-- 主题色（放最后） -->
             <div class="card">
-                <div class="card-title">🎨 主题色</div>
+                <div class="card-title"><i class="fas fa-palette"></i> 主题色</div>
                 <p style="color:var(--text-secondary);margin-bottom:18px;">选择你喜欢的主题颜色，立即生效并自动保存。</p>
                 <div class="theme-color-grid">
                     <div v-for="theme in themeColors" :key="theme.value"
@@ -1994,7 +2410,7 @@
     <div class="modal-overlay" :class="{show: showTagModal}" @click.self="showTagModal = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">🏷️ 添加标签</div>
+                <div class="modal-title"><i class="fas fa-tags"></i> 添加标签</div>
                 <button class="modal-close" @click="showTagModal = false">&times;</button>
             </div>
             <div class="modal-body">
@@ -2017,8 +2433,8 @@
                             </div>
                         </div>
                     </div>
-                    <div style="margin-top:8px;font-size:12px;color:var(--text-tertiary);">
-                        💡 勾选要添加标签的乌龟，已存在的标签不会重复添加
+                    <div class="modal-hint">
+                        <i class="fas fa-circle-info"></i> 勾选要添加标签的乌龟，已存在的标签不会重复添加
                     </div>
                 </div>
             </div>
@@ -2035,13 +2451,13 @@
     <div class="modal-overlay confirm-modal" :class="{show: showConfirmModal}" @click.self="showConfirmModal = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">⚠️ 确认删除</div>
+                <div class="modal-title danger-title"><i class="fas fa-triangle-exclamation"></i> 确认删除</div>
                 <button class="modal-close" @click="showConfirmModal = false">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="confirm-message">
                     <div>确定要删除选中的 <span class="highlight">{{ confirmCount }}</span> 只乌龟吗？</div>
-                    <div class="sub">它们的生长记录也将被一并删除，此操作不可撤销。</div>
+                    <div class="sub">它们的生长记录和图片也将被一并删除，此操作不可撤销。</div>
                     <div class="sub" style="margin-top:8px;font-size:12px;color:var(--text-tertiary);">{{ confirmNames }}</div>
                 </div>
             </div>
@@ -2056,15 +2472,15 @@
     <div class="modal-overlay confirm-modal" :class="{show: showClearConfirmModal}" @click.self="showClearConfirmModal = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">⚠️ 确认清空</div>
+                <div class="modal-title danger-title"><i class="fas fa-triangle-exclamation"></i> 确认清空</div>
                 <button class="modal-close" @click="showClearConfirmModal = false">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="confirm-message">
                     <div>确定要 <span class="highlight">永久删除</span> 所有数据吗？</div>
-                    <div class="sub">包括所有乌龟档案和生长记录，此操作不可撤销。</div>
+                    <div class="sub">包括所有乌龟档案、生长记录和图片，此操作不可撤销。</div>
                     <div class="sub" style="margin-top:8px;font-size:12px;color:var(--text-tertiary);">
-                        当前共有 {{ turtles.length }} 只乌龟，{{ records.length }} 条记录
+                        当前共有 {{ turtles.length }} 只乌龟，{{ records.length }} 条记录，{{ photos.length }} 张图片
                     </div>
                 </div>
             </div>
@@ -2079,7 +2495,7 @@
     <div class="modal-overlay confirm-modal" :class="{show: showImportConfirmModal}" @click.self="showImportConfirmModal = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">⚠️ 确认导入</div>
+                <div class="modal-title"><i class="fas fa-triangle-exclamation"></i> 确认导入</div>
                 <button class="modal-close" @click="showImportConfirmModal = false; pendingImportFile = null">&times;</button>
             </div>
             <div class="modal-body">
@@ -2087,7 +2503,7 @@
                     <div>导入将 <span class="highlight">覆盖</span> 当前所有数据，确定继续吗？</div>
                     <div class="sub">当前数据将被永久替换，建议先导出备份。</div>
                     <div class="sub" style="margin-top:8px;font-size:12px;color:var(--text-tertiary);">
-                        当前共有 {{ turtles.length }} 只乌龟，{{ records.length }} 条记录
+                        当前共有 {{ turtles.length }} 只乌龟，{{ records.length }} 条记录，{{ photos.length }} 张图片
                     </div>
                 </div>
             </div>
@@ -2102,13 +2518,13 @@
     <div class="modal-overlay confirm-modal" :class="{show: showDeleteTurtleConfirm}" @click.self="showDeleteTurtleConfirm = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">⚠️ 确认删除</div>
+                <div class="modal-title danger-title"><i class="fas fa-triangle-exclamation"></i> 确认删除</div>
                 <button class="modal-close" @click="showDeleteTurtleConfirm = false">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="confirm-message">
                     <div>确定要删除乌龟 <span class="highlight">{{ deleteTurtleName }}</span> 吗？</div>
-                    <div class="sub">它的 {{ deleteTurtleRecordCount }} 条生长记录也将被一并删除，此操作不可撤销。</div>
+                    <div class="sub">它的 {{ deleteTurtleRecordCount }} 条生长记录和 {{ deleteTurtlePhotoCount }} 张图片也将被一并删除，此操作不可撤销。</div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -2122,7 +2538,7 @@
     <div class="modal-overlay confirm-modal" :class="{show: showDeleteRecordConfirm}" @click.self="showDeleteRecordConfirm = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">⚠️ 确认删除</div>
+                <div class="modal-title danger-title"><i class="fas fa-triangle-exclamation"></i> 确认删除</div>
                 <button class="modal-close" @click="showDeleteRecordConfirm = false">&times;</button>
             </div>
             <div class="modal-body">
@@ -2141,11 +2557,34 @@
         </div>
     </div>
 
+    <!-- ===== 确认弹窗：删除图片 ===== -->
+    <div class="modal-overlay confirm-modal" :class="{show: showDeletePhotoConfirm}" @click.self="showDeletePhotoConfirm = false">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title danger-title"><i class="fas fa-triangle-exclamation"></i> 确认删除</div>
+                <button class="modal-close" @click="showDeletePhotoConfirm = false">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-message">
+                    <div>确定要删除这张图片吗？</div>
+                    <div class="sub">此操作不可撤销。</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-confirm" @click="showDeletePhotoConfirm = false">取消</button>
+                <button class="btn btn-confirm danger-confirm" @click="executeDeletePhoto">确认删除</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== 乌龟模态框 ===== -->
     <div class="modal-overlay" :class="{show: showTurtleModal}" @click.self="showTurtleModal = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">{{ editingTurtleId ? '编辑乌龟' : '添加乌龟' }}</div>
+                <div class="modal-title">
+                    <i :class="editingTurtleId ? 'fas fa-pen-to-square' : 'fas fa-plus'"></i>
+                    {{ editingTurtleId ? '编辑乌龟' : '添加乌龟' }}
+                </div>
                 <button class="modal-close" @click="showTurtleModal = false">&times;</button>
             </div>
             <div class="modal-body">
@@ -2209,7 +2648,10 @@
     <div class="modal-overlay" :class="{show: showRecordModal}" @click.self="showRecordModal = false">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">{{ editingRecordId ? '编辑记录' : '添加记录' }}</div>
+                <div class="modal-title">
+                    <i :class="editingRecordId ? 'fas fa-pen-to-square' : 'fas fa-plus'"></i>
+                    {{ editingRecordId ? '编辑记录' : '添加记录' }}
+                </div>
                 <button class="modal-close" @click="showRecordModal = false">&times;</button>
             </div>
             <div class="modal-body">
@@ -2260,6 +2702,25 @@
         </div>
     </div>
 
+    <!-- ===== 灯箱 ===== -->
+    <div class="lightbox-overlay" :class="{show: showLightbox}" @click.self="closeLightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" @click="closeLightbox" title="关闭 (Esc)">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <button class="lightbox-nav lightbox-prev" @click="prevPhoto" v-if="lightboxPhotos.length > 1" title="上一张">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img :src="lightboxPhotos[lightboxIndex]?.data" :alt="lightboxPhotos[lightboxIndex]?.name" v-if="lightboxPhotos.length > 0">
+            <button class="lightbox-nav lightbox-next" @click="nextPhoto" v-if="lightboxPhotos.length > 1" title="下一张">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-counter" v-if="lightboxPhotos.length > 1">
+                {{ lightboxIndex + 1 }} / {{ lightboxPhotos.length }}
+            </div>
+        </div>
+    </div>
+
     <div class="toast-container">
         <div v-for="(toast, index) in toastQueue" :key="index"
         class="toast" :class="{ show: toast.visible, error: toast.type === 'error', success: toast.type === 'success' }">
@@ -2270,17 +2731,18 @@
 </div>
 
 <script>
-    const { createApp, ref, reactive, computed, onMounted, nextTick, toRaw } = Vue;
+    const { createApp, ref, reactive, computed, onMounted, onUnmounted, nextTick, toRaw, watch } = Vue;
 
     const DB_NAME = 'TurtleFarmDB',
-        VERSION = 1;
-    const STORE_TURTLES = 'turtles',
-        STORE_RECORDS = 'records';
+        DB_VERSION = 2,
+        STORE_TURTLES = 'turtles',
+        STORE_RECORDS = 'records',
+        STORE_PHOTOS = 'photos';
     let db = null;
 
     function openDB() {
         return new Promise((resolve, reject) => {
-            const req = indexedDB.open(DB_NAME, VERSION);
+            const req = indexedDB.open(DB_NAME, DB_VERSION);
             req.onupgradeneeded = (e) => {
                 const d = e.target.result;
                 if (!d.objectStoreNames.contains(STORE_TURTLES)) {
@@ -2290,6 +2752,10 @@
                 if (!d.objectStoreNames.contains(STORE_RECORDS)) {
                     const rs = d.createObjectStore(STORE_RECORDS, { keyPath: 'id' });
                     rs.createIndex('turtleId', 'turtleId', { unique: false });
+                }
+                if (!d.objectStoreNames.contains(STORE_PHOTOS)) {
+                    const ps = d.createObjectStore(STORE_PHOTOS, { keyPath: 'id' });
+                    ps.createIndex('turtleId', 'turtleId', { unique: false });
                 }
             };
             req.onsuccess = (e) => { db = e.target.result;
@@ -2349,17 +2815,40 @@
         });
     }
 
+    // 按索引查
+    function dbGetByIndex(store, indexName, value) {
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(store, 'readonly');
+            const idx = tx.objectStore(store).index(indexName);
+            const req = idx.getAll(value);
+            req.onsuccess = () => resolve(req.result || []);
+            req.onerror = (e) => reject(e.target.error);
+        });
+    }
+
     function uid() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
 
+    // 读取文件为 dataURL
+    function fileToDataURL(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (e) => reject(e.target.error);
+            reader.readAsDataURL(file);
+        });
+    }
+
     createApp({
         setup() {
+            const MAX_PHOTOS = 20;
+
             const navItems = [
-                { page: 'dashboard', label: '仪表盘', icon: '📊' },
-                { page: 'turtles', label: '乌龟档案', icon: '🐢' },
-                { page: 'records', label: '生长记录', icon: '📝' },
-                { page: 'settings', label: '设置', icon: '⚙️' },
+                { page: 'dashboard', label: '仪表盘', icon: 'fas fa-chart-pie' },
+                { page: 'turtles', label: '乌龟档案', icon: 'fas fa-folder-open' },
+                { page: 'records', label: '生长记录', icon: 'fas fa-clipboard-list' },
+                { page: 'settings', label: '设置', icon: 'fas fa-gear' },
             ];
 
             const themeColors = [
@@ -2383,6 +2872,7 @@
 
             const turtles = ref([]);
             const records = ref([]);
+            const photos = ref([]);
             const turtleSearch = ref('');
             const recordSearch = ref('');
             const showTurtleModal = ref(false);
@@ -2393,14 +2883,26 @@
             const showImportConfirmModal = ref(false);
             const showDeleteTurtleConfirm = ref(false);
             const showDeleteRecordConfirm = ref(false);
+            const showDeletePhotoConfirm = ref(false);
             const editingTurtleId = ref(null);
             const editingRecordId = ref(null);
             const weightChart = ref(null);
             const growthChart = ref(null);
             const importInput = ref(null);
+            const photoInput = ref(null);
             const newTagMap = reactive({});
             const selectedTag = ref('');
             const pendingImportFile = ref(null);
+
+            // 图库相关
+            const isDragoverGallery = ref(false);
+            const isDragoverImport = ref(false);
+            const deletePhotoTarget = ref(null);
+
+            // 灯箱
+            const showLightbox = ref(false);
+            const lightboxPhotos = ref([]);
+            const lightboxIndex = ref(0);
 
             const turtleLockShake = ref(false);
             const turtleLockHint = ref(false);
@@ -2465,6 +2967,17 @@
                 localStorage.setItem(STORAGE_KEY_THEME_COLOR, theme);
             };
 
+            // 监听其他标签页的主题变化
+            const handleStorageChange = (e) => {
+                if (e.key === STORAGE_KEY_THEME_COLOR) {
+                    currentTheme.value = e.newValue || 'blue';
+                    document.body.setAttribute('data-theme', e.newValue || 'blue');
+                } else if (e.key === STORAGE_KEY_THEME) {
+                    isDarkMode.value = e.newValue === 'dark';
+                    updateThemeClass();
+                }
+            };
+
             const selectedTurtleIds = ref([]);
             const confirmCount = ref(0);
             const confirmNames = ref('');
@@ -2472,6 +2985,7 @@
             const deleteTurtleId = ref(null);
             const deleteTurtleName = ref('');
             const deleteTurtleRecordCount = ref(0);
+            const deleteTurtlePhotoCount = ref(0);
 
             const deleteRecordId = ref(null);
             const deleteRecordTurtleName = ref('');
@@ -2488,9 +3002,8 @@
             const handleLogoError = (e) => {
                 e.target.style.display = 'none';
                 const parent = e.target.parentElement;
-                const placeholder = document.createElement('span');
-                placeholder.className = 'logo-placeholder';
-                placeholder.textContent = '🐢';
+                const placeholder = document.createElement('i');
+                placeholder.className = 'fas fa-folder-open logo-placeholder';
                 parent.appendChild(placeholder);
             };
 
@@ -2533,6 +3046,9 @@
                 .filter(r => r.turtleId === currentTurtleId.value)
                 .sort((a, b) => new Date(a.date) - new Date(b.date)));
             const latestRecord = computed(() => currentTurtleRecords.value[currentTurtleRecords.value.length - 1] || {});
+            const currentTurtlePhotos = computed(() => photos.value
+                .filter(p => p.turtleId === currentTurtleId.value)
+                .sort((a, b) => a.uploadTime - b.uploadTime));
 
             const allTags = computed(() => {
                 const set = new Set();
@@ -2581,6 +3097,110 @@
                 selectedTurtleIds.value = [];
             };
 
+            // ===== 图片上传 =====
+            const triggerFileInput = () => {
+                if (photoInput.value) photoInput.value.click();
+            };
+
+            const processPhotoFiles = async (files) => {
+                if (!currentTurtleId.value) return;
+                const currentCount = currentTurtlePhotos.value.length;
+                const remaining = MAX_PHOTOS - currentCount;
+                if (remaining <= 0) {
+                    showToast(`每只乌龟最多上传 ${MAX_PHOTOS} 张图片`, 'error');
+                    return;
+                }
+                const fileArr = Array.from(files).filter(f => f.type.startsWith('image/'));
+                if (fileArr.length === 0) {
+                    showToast('请选择图片文件', 'error');
+                    return;
+                }
+                const toUpload = fileArr.slice(0, remaining);
+                if (fileArr.length > remaining) {
+                    showToast(`最多还能上传 ${remaining} 张，已自动截取`, 'error');
+                }
+                const loadingToastId = showToast(`正在上传 ${toUpload.length} 张图片...`, 'success', 0, true);
+                try {
+                    for (const file of toUpload) {
+                        const dataUrl = await fileToDataURL(file);
+                        const photo = {
+                            id: uid(),
+                            turtleId: currentTurtleId.value,
+                            data: dataUrl,
+                            name: file.name,
+                            uploadTime: Date.now()
+                        };
+                        await dbAdd(STORE_PHOTOS, photo);
+                    }
+                    hideToast(loadingToastId);
+                    await loadData();
+                    showToast(`已上传 ${toUpload.length} 张图片`);
+                } catch (e) {
+                    hideToast(loadingToastId);
+                    showToast('上传失败：' + e.message, 'error');
+                }
+            };
+
+            const handlePhotoSelect = (e) => {
+                const files = e.target.files;
+                processPhotoFiles(files);
+                e.target.value = '';
+            };
+
+            const handlePhotoDrop = (e) => {
+                isDragoverGallery.value = false;
+                const files = e.dataTransfer.files;
+                processPhotoFiles(files);
+            };
+
+            const confirmDeletePhoto = (photo) => {
+                deletePhotoTarget.value = photo;
+                showDeletePhotoConfirm.value = true;
+            };
+
+            const executeDeletePhoto = async () => {
+                const photo = deletePhotoTarget.value;
+                if (!photo) return;
+                try {
+                    await dbDel(STORE_PHOTOS, photo.id);
+                    showDeletePhotoConfirm.value = false;
+                    deletePhotoTarget.value = null;
+                    await loadData();
+                    showToast('图片已删除');
+                } catch (e) {
+                    showToast('删除失败：' + e.message, 'error');
+                }
+            };
+
+            // ===== 灯箱 =====
+            const openLightbox = (index) => {
+                lightboxPhotos.value = currentTurtlePhotos.value;
+                lightboxIndex.value = index;
+                showLightbox.value = true;
+            };
+
+            const closeLightbox = () => {
+                showLightbox.value = false;
+            };
+
+            const prevPhoto = () => {
+                if (lightboxPhotos.value.length === 0) return;
+                lightboxIndex.value = (lightboxIndex.value - 1 + lightboxPhotos.value.length) % lightboxPhotos.value.length;
+            };
+
+            const nextPhoto = () => {
+                if (lightboxPhotos.value.length === 0) return;
+                lightboxIndex.value = (lightboxIndex.value + 1) % lightboxPhotos.value.length;
+            };
+
+            const handleKeydown = (e) => {
+                if (!showLightbox.value) return;
+                if (e.key === 'Escape') closeLightbox();
+                else if (e.key === 'ArrowLeft') prevPhoto();
+                else if (e.key === 'ArrowRight') nextPhoto();
+            };
+
+            // ===== 批量删除 =====
             const confirmBatchDelete = () => {
                 if (selectedTurtleIds.value.length === 0) return;
                 const ids = selectedTurtleIds.value;
@@ -2600,9 +3220,9 @@
                     for (const id of ids) {
                         await dbDel(STORE_TURTLES, id);
                         const recsToDelete = records.value.filter(r => r.turtleId === id);
-                        for (const r of recsToDelete) {
-                            await dbDel(STORE_RECORDS, r.id);
-                        }
+                        for (const r of recsToDelete) await dbDel(STORE_RECORDS, r.id);
+                        const photosToDelete = photos.value.filter(p => p.turtleId === id);
+                        for (const p of photosToDelete) await dbDel(STORE_PHOTOS, p.id);
                     }
                     showConfirmModal.value = false;
                     await loadData();
@@ -2619,6 +3239,7 @@
                 deleteTurtleId.value = id;
                 deleteTurtleName.value = t.name || t.code;
                 deleteTurtleRecordCount.value = records.value.filter(r => r.turtleId === id).length;
+                deleteTurtlePhotoCount.value = photos.value.filter(p => p.turtleId === id).length;
                 showDeleteTurtleConfirm.value = true;
             };
 
@@ -2628,9 +3249,9 @@
                 try {
                     await dbDel(STORE_TURTLES, id);
                     const recsToDelete = records.value.filter(r => r.turtleId === id);
-                    for (const r of recsToDelete) {
-                        await dbDel(STORE_RECORDS, r.id);
-                    }
+                    for (const r of recsToDelete) await dbDel(STORE_RECORDS, r.id);
+                    const photosToDelete = photos.value.filter(p => p.turtleId === id);
+                    for (const p of photosToDelete) await dbDel(STORE_PHOTOS, p.id);
                     showDeleteTurtleConfirm.value = false;
                     await loadData();
                     showToast('乌龟已删除');
@@ -2665,7 +3286,7 @@
             };
 
             const confirmClearAll = () => {
-                if (turtles.value.length === 0 && records.value.length === 0) {
+                if (turtles.value.length === 0 && records.value.length === 0 && photos.value.length === 0) {
                     showToast('数据已经是空的', 'error');
                     return;
                 }
@@ -2676,6 +3297,7 @@
                 try {
                     await dbClr(STORE_TURTLES);
                     await dbClr(STORE_RECORDS);
+                    await dbClr(STORE_PHOTOS);
                     showClearConfirmModal.value = false;
                     await loadData();
                     showToast('所有数据已清空');
@@ -2697,6 +3319,18 @@
                 e.target.value = '';
             };
 
+            const handleImportDrop = (e) => {
+                isDragoverImport.value = false;
+                const file = e.dataTransfer.files[0];
+                if (!file) return;
+                if (!file.name.endsWith('.json')) {
+                    showToast('请拖拽 JSON 文件', 'error');
+                    return;
+                }
+                pendingImportFile.value = file;
+                showImportConfirmModal.value = true;
+            };
+
             const executeImport = async () => {
                 const file = pendingImportFile.value;
                 if (!file) { showImportConfirmModal.value = false; return; }
@@ -2704,7 +3338,7 @@
                 try {
                     isImporting.value = true;
                     showImportConfirmModal.value = false;
-                    loadingToastId = showToast('正在导入数据，请稍候...', 'success', 0, true);
+                    loadingToastId = showToast('正在导入数据（含图片），请稍候...', 'success', 0, true);
 
                     const text = await file.text();
                     const data = JSON.parse(text);
@@ -2712,17 +3346,22 @@
 
                     await dbClr(STORE_TURTLES);
                     await dbClr(STORE_RECORDS);
+                    await dbClr(STORE_PHOTOS);
                     for (const t of data.turtles) await dbAdd(STORE_TURTLES, t);
                     for (const r of data.records) await dbAdd(STORE_RECORDS, r);
+                    if (data.photos && Array.isArray(data.photos)) {
+                        for (const p of data.photos) await dbAdd(STORE_PHOTOS, p);
+                    }
 
                     hideToast(loadingToastId);
                     pendingImportFile.value = null;
                     await loadData();
-                    showToast(`✅ 导入成功：${data.turtles.length} 只乌龟，${data.records.length} 条记录`);
+                    const photoCount = (data.photos && data.photos.length) || 0;
+                    showToast(`导入成功：${data.turtles.length} 只乌龟，${data.records.length} 条记录，${photoCount} 张图片`);
                 } catch (err) {
                     if (loadingToastId) hideToast(loadingToastId);
                     pendingImportFile.value = null;
-                    showToast('❌ 导入失败：' + err.message, 'error');
+                    showToast('导入失败：' + err.message, 'error');
                 } finally {
                     isImporting.value = false;
                 }
@@ -2944,8 +3583,13 @@
 
             const exportData = () => {
                 try {
-                    const data = { version: 1, exportTime: new Date().toISOString(), turtles: turtles.value,
-                        records: records.value };
+                    const data = {
+                        version: 2,
+                        exportTime: new Date().toISOString(),
+                        turtles: turtles.value,
+                        records: records.value,
+                        photos: photos.value
+                    };
                     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
@@ -2953,7 +3597,7 @@
                     a.download = `turtle-farm-${new Date().toISOString().split('T')[0]}.json`;
                     a.click();
                     URL.revokeObjectURL(url);
-                    showToast('数据已导出');
+                    showToast(`已导出（含 ${photos.value.length} 张图片）`);
                 } catch (e) {
                     showToast('导出失败：' + e.message, 'error');
                 }
@@ -2969,6 +3613,7 @@
             };
             const recordCount = (id) => records.value.filter(r => r.turtleId === id).length;
             const genderClass = (g) => g === '雄' ? 'badge-male' : g === '雌' ? 'badge-female' : 'badge-unknown';
+            const genderIcon = (g) => g === '雄' ? 'fas fa-mars' : g === '雌' ? 'fas fa-venus' : 'fas fa-circle-question';
 
             const filteredRecords = computed(() => {
                 const s = recordSearch.value.toLowerCase().trim();
@@ -3013,6 +3658,7 @@
                 try {
                     turtles.value = await dbAll(STORE_TURTLES);
                     records.value = await dbAll(STORE_RECORDS);
+                    photos.value = await dbAll(STORE_PHOTOS);
                     turtles.value.forEach(t => {
                         if (!(t.id in newTagMap)) newTagMap[t.id] = '';
                     });
@@ -3179,6 +3825,8 @@
 
             onMounted(async () => {
                 await openDB();
+                window.addEventListener('keydown', handleKeydown);
+                window.addEventListener('storage', handleStorageChange);
 
                 const isFirstLoad = localStorage.getItem(FIRST_LOAD_KEY) !== 'true';
 
@@ -3236,13 +3884,20 @@
                 await loadData();
             });
 
+            onUnmounted(() => {
+                window.removeEventListener('keydown', handleKeydown);
+                window.removeEventListener('storage', handleStorageChange);
+            });
+
             return {
+                MAX_PHOTOS,
                 navItems,
                 themeColors,
                 currentPage,
                 currentTurtleId,
                 turtles,
                 records,
+                photos,
                 turtleSearch,
                 recordSearch,
                 showTurtleModal,
@@ -3253,6 +3908,7 @@
                 showImportConfirmModal,
                 showDeleteTurtleConfirm,
                 showDeleteRecordConfirm,
+                showDeletePhotoConfirm,
                 editingTurtleId,
                 editingRecordId,
                 turtleForm,
@@ -3260,6 +3916,7 @@
                 weightChart,
                 growthChart,
                 importInput,
+                photoInput,
                 toastQueue,
                 newTagMap,
                 selectedTag,
@@ -3272,12 +3929,14 @@
                 deleteTurtleId,
                 deleteTurtleName,
                 deleteTurtleRecordCount,
+                deleteTurtlePhotoCount,
                 deleteRecordId,
                 deleteRecordTurtleName,
                 deleteRecordDate,
                 isAllSelected,
                 currentTurtle,
                 currentTurtleRecords,
+                currentTurtlePhotos,
                 latestRecord,
                 filteredTurtles,
                 filteredRecords,
@@ -3294,12 +3953,27 @@
                 turtleLockShake,
                 turtleLockHint,
                 handleTurtleSelectClick,
+                isDragoverGallery,
+                isDragoverImport,
+                showLightbox,
+                lightboxPhotos,
+                lightboxIndex,
                 navigate,
                 viewTurtle,
                 turtleName,
                 turtleSpecies,
                 recordCount,
                 genderClass,
+                genderIcon,
+                triggerFileInput,
+                handlePhotoSelect,
+                handlePhotoDrop,
+                confirmDeletePhoto,
+                executeDeletePhoto,
+                openLightbox,
+                closeLightbox,
+                prevPhoto,
+                nextPhoto,
                 openTurtleModal,
                 saveTurtle,
                 confirmDeleteTurtle,
@@ -3311,6 +3985,7 @@
                 exportData,
                 openImportConfirm,
                 handleImportFile,
+                handleImportDrop,
                 executeImport,
                 addTag,
                 removeTag,
