@@ -26,25 +26,43 @@ body.dark-mode[data-theme=pink]{--accent-soft:#3d1a2e;--tag-bg:#3d1a2e;--tag-tex
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text-primary);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s ease,color .3s ease}
 #app{min-height:100vh;display:flex;flex-direction:column}
-.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border-light);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:40;padding:28px 16px 20px;box-shadow:var(--shadow-sm);transition:transform .25s ease,background .3s ease,border-color .3s ease}
-.sidebar-brand{padding:0 8px 24px;border-bottom:1px solid var(--border-light);margin-bottom:20px;cursor:pointer;transition:var(--transition);border-radius:var(--radius-sm);text-decoration:none;display:block}
+.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border-light);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:40;padding:28px 16px 20px;box-shadow:var(--shadow-sm);transition:width .25s ease,padding .25s ease,transform .25s ease,background .3s ease,border-color .3s ease}
+.sidebar-brand{padding:0 8px 24px;border-bottom:1px solid var(--border-light);margin-bottom:20px;cursor:pointer;transition:var(--transition);border-radius:var(--radius-sm);text-decoration:none;display:block;white-space:nowrap;overflow:hidden}
 .sidebar-brand:hover{background:var(--surface-hover)}
 .brand-top{display:flex;align-items:center;gap:12px;pointer-events:none}
 .brand-logo{width:40px;height:40px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;pointer-events:none}
 .brand-logo img{width:100%;height:100%;object-fit:cover;display:block}
 .brand-logo .logo-placeholder{font-size:20px;color:var(--accent)}
 .sidebar-brand h1{font-size:16px;font-weight:600;letter-spacing:-.2px;color:var(--text-primary);line-height:1.3;pointer-events:none;transition:color .3s ease}
-.brand-sub{font-size:10px;color:var(--text-tertiary);letter-spacing:.5px;font-weight:400;margin-top:2px;margin-left:52px;pointer-events:none}
+.brand-sub{font-size:10px;color:var(--text-tertiary);letter-spacing:.5px;font-weight:400;margin-top:2px;margin-left:52px;pointer-events:none;white-space:nowrap}
 .sidebar-nav{flex:1;display:flex;flex-direction:column;gap:2px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);font-weight:500;transition:var(--transition);font-size:14px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);font-weight:500;transition:var(--transition);font-size:14px;white-space:nowrap}
 .nav-item:hover{background:var(--surface-hover);color:var(--text-primary)}
 .nav-item.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.nav-icon{font-size:16px;width:24px;text-align:center;opacity:.85}
-.sidebar-bottom{margin-top:auto;padding-top:12px;border-top:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
-.sidebar-footer{font-size:11px;color:var(--text-tertiary);letter-spacing:.2px}
-.theme-toggle-btn{background:none;border:none;color:var(--text-tertiary);font-size:16px;cursor:pointer;padding:4px 8px;border-radius:var(--radius-sm);transition:var(--transition);display:flex;align-items:center;justify-content:center}
+.nav-icon{font-size:16px;width:24px;text-align:center;opacity:.85;flex-shrink:0}
+.sidebar-bottom{margin-top:auto;padding-top:12px;border-top:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;overflow:hidden}
+.sidebar-footer{font-size:11px;color:var(--text-tertiary);letter-spacing:.2px;white-space:nowrap}
+.theme-toggle-btn{background:none;border:none;color:var(--text-tertiary);font-size:16px;cursor:pointer;padding:4px 8px;border-radius:var(--radius-sm);transition:var(--transition);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .theme-toggle-btn:hover{background:var(--surface-hover);color:var(--text-primary)}
+.sidebar.collapsed{width:64px;padding:28px 10px 20px}
+.sidebar.collapsed .sidebar-brand{padding:0 0 20px;display:flex;justify-content:center}
+.sidebar.collapsed .brand-top{justify-content:center;gap:0}
+.sidebar.collapsed .brand-top>div:last-child{display:none}
+.sidebar.collapsed .brand-logo{width:36px;height:36px}
+.sidebar.collapsed .brand-sub{display:none}
+.sidebar.collapsed .nav-item{justify-content:center;padding:12px 0;gap:0}
+.sidebar.collapsed .nav-item>span{display:none}
+.sidebar.collapsed .nav-icon{font-size:18px;width:auto;opacity:1}
+.sidebar.collapsed .sidebar-bottom{flex-direction:column;gap:6px;align-items:center}
+.sidebar.collapsed .sidebar-footer{display:none}
+/* ===== 中间右侧凸出的小长方形收回按钮 ===== */
+.menu-bar{position:fixed;top:50%;transform:translateY(-50%);margin-left:-9px;width:18px;height:40px;background:var(--surface);border:1px solid var(--border-light);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:45;box-shadow:0 2px 8px rgba(0,0,0,.06);color:var(--text-tertiary);transition:left .25s ease,background .25s ease,border-color .25s ease,color .25s ease,box-shadow .25s ease;user-select:none;-webkit-user-select:none}
+body.dark-mode .menu-bar{box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.menu-bar:hover{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.35)}
+.menu-bar:active{transform:translateY(-50%) scale(.94)}
+.menu-bar-arrow{font-size:10px;transition:transform .25s ease}
 .main{margin-left:220px;padding:32px 40px 48px;flex:1;min-height:100vh;background:var(--bg);transition:margin-left .25s ease,background .3s ease;display:flex;flex-direction:column}
+.main.sidebar-collapsed{margin-left:64px}
 .mobile-header{display:none;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border-light);position:sticky;top:0;z-index:39;transition:background .3s ease,border-color .3s ease}
 .mobile-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-primary)}
 .mobile-brand img{width:32px;height:32px;border-radius:8px;object-fit:cover;background:var(--accent-soft)}
@@ -267,15 +285,6 @@ body.dark-mode .print-preview-body{background:#0f172a}
 .archive-records-table td{padding:8px 12px;border-bottom:1px solid #f1f5f9;color:#334155}
 .archive-footer{padding-top:18px;border-top:1px solid #e9edf2;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#94a3b8}
 .archive-footer .brand{font-weight:600;color:#0f172a}
-@media print{
-body *{visibility:hidden}
-.archive-card,.archive-card *{visibility:visible}
-.archive-card{position:absolute;left:0;top:0;width:100%;min-height:auto;box-shadow:none;padding:20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.modal-overlay{position:static;background:none!important;backdrop-filter:none!important}
-.print-preview-modal .modal{box-shadow:none!important;max-width:100%!important}
-.print-preview-modal .modal-header,.print-preview-modal .modal-footer{display:none!important}
-.print-preview-body{background:#fff!important;padding:0!important;overflow:visible!important}
-}
 .confirm-modal .modal{max-width:420px}
 .confirm-message{font-size:15px;color:var(--text-primary);line-height:1.7;padding:4px 0 8px}
 .confirm-message .highlight{font-weight:600;color:var(--text-primary)}
@@ -287,7 +296,8 @@ body *{visibility:hidden}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:5px}
 .required-star{color:var(--danger);margin-left:2px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 14px;border:1px solid var(--border-light);border-radius:var(--radius-sm);font-size:13px;outline:none;font-family:inherit;background:var(--surface);transition:var(--transition);color:var(--text-primary)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 14px;border:1px solid var(--border-light);border-radius:var(--radius-sm);font-size:13px;outline:none;font-family:inherit;background:var(--surface);transition:border-color .25s ease,box-shadow .25s ease;color:var(--text-primary)}
+.form-group textarea{resize:vertical;min-height:56px;max-height:200px;line-height:1.6}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
 .form-group.error input,.form-group.error select{border-color:var(--required-shake)!important;animation:shakeBlink .6s ease 2}
 @keyframes shakeBlink{0%,100%{border-color:var(--required-shake);box-shadow:0 0 0 3px rgba(220,38,38,.15)}50%{border-color:var(--border-light);box-shadow:none}}
@@ -318,14 +328,15 @@ body *{visibility:hidden}
 ::-webkit-scrollbar-track{background:transparent}
 tbody tr.selected{background:var(--accent-soft)}
 @media (max-width:820px){
-.sidebar{width:100%;height:auto;position:fixed;top:auto;bottom:0;flex-direction:row;padding:0 6px;border-right:none;border-top:1px solid var(--border-light);background:var(--surface);box-shadow:0 -2px 12px rgba(0,0,0,.04);z-index:50;border-radius:0;transform:translateY(0)}
-.sidebar-brand,.sidebar-footer,.sidebar-bottom{display:none}
+.sidebar{width:100%;height:auto;position:fixed;top:auto;bottom:0;flex-direction:row;padding:0 6px;border-right:none;border-top:1px solid var(--border-light);background:var(--surface);box-shadow:0 -2px 12px rgba(0,0,0,.04);z-index:50;border-radius:0;transform:translateY(0);overflow:visible}
+.sidebar-brand,.sidebar-footer,.sidebar-bottom,.menu-bar{display:none!important}
 .sidebar-nav{flex-direction:row;justify-content:space-around;padding:6px 0;gap:0;flex:1}
 .nav-item{flex-direction:column;gap:2px;padding:8px 6px;font-size:11px;border-radius:0;flex:1;text-align:center;min-width:0}
 .nav-item.active{background:transparent;color:var(--accent)}
-.nav-icon{font-size:18px}
+.nav-item>span{display:inline!important}
+.nav-icon{font-size:18px;width:auto}
 .mobile-header{display:flex!important}
-.main{margin-left:0;padding:0 16px 80px;width:100%;overflow-x:hidden}
+.main{margin-left:0!important;padding:0 16px 80px;width:100%;overflow-x:hidden}
 .main>.page-header:first-of-type{margin-top:16px}
 .page-header{flex-direction:column;align-items:flex-start}
 .header-actions{width:100%}
@@ -394,7 +405,7 @@ thead th,tbody td{padding:8px 10px}
 <body>
 <div id="app" v-cloak>
 
-<aside class="sidebar">
+<aside class="sidebar" :class="{ collapsed: isSidebarCollapsed }">
 <a href="index.html" class="sidebar-brand">
 <div class="brand-top">
 <div class="brand-logo"><img src="index.jpg" alt="Logo" @error="handleLogoError"></div>
@@ -416,6 +427,10 @@ thead th,tbody td{padding:8px 10px}
 </div>
 </aside>
 
+<div class="menu-bar" :style="{ left: (isSidebarCollapsed ? 64 : 220) + 'px' }" @click="toggleSidebar" :title="isSidebarCollapsed ? '展开侧边栏' : '收起侧边栏'">
+<i class="menu-bar-arrow" :class="isSidebarCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left'"></i>
+</div>
+
 <header class="mobile-header">
 <a href="index.html" class="mobile-brand">
 <img src="index.jpg" alt="Logo" @error="handleMobileLogoError">
@@ -427,7 +442,7 @@ thead th,tbody td{padding:8px 10px}
 </div>
 </header>
 
-<main class="main">
+<main class="main" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
 
 <!-- 仪表盘 -->
 <div v-if="currentPage === 'dashboard'">
@@ -492,7 +507,7 @@ thead th,tbody td{padding:8px 10px}
 </div>
 <div class="header-actions">
 <button class="btn btn-secondary" @click="currentTurtleId = null; selectedTag = ''; clearSelection()"><i class="fas fa-arrow-left"></i> 返回列表</button>
-<button class="btn btn-secondary" @click="openPrintPreview"><i class="fas fa-print"></i> 打印档案</button>
+<button class="btn btn-secondary" @click="openPrintPreview"><i class="fas fa-id-card"></i> 档案预览</button>
 <button class="btn btn-primary" @click="openRecordModal(currentTurtle.id)"><i class="fas fa-plus"></i> 添加记录</button>
 </div>
 </div>
@@ -606,11 +621,11 @@ thead th,tbody td{padding:8px 10px}
 
 </main>
 
-<!-- 打印预览 -->
+<!-- 档案卡预览 -->
 <div class="modal-overlay print-preview-modal" :class="{show: showPrintPreview}" @click.self="closePrintPreview">
 <div class="modal">
 <div class="modal-header">
-<div class="modal-title"><i class="fas fa-print"></i> 档案卡预览</div>
+<div class="modal-title"><i class="fas fa-id-card"></i> 档案卡预览</div>
 <button class="modal-close" @click="closePrintPreview">&times;</button>
 </div>
 <div class="print-preview-body">
@@ -651,8 +666,7 @@ thead th,tbody td{padding:8px 10px}
 </div>
 <div class="modal-footer">
 <button class="btn btn-secondary" @click="closePrintPreview">关闭</button>
-<button class="btn btn-secondary" @click="saveAsImage"><i class="fas fa-image"></i> 保存为图片</button>
-<button class="btn btn-primary" @click="doPrint"><i class="fas fa-print"></i> 打印</button>
+<button class="btn btn-primary" @click="saveAsImage"><i class="fas fa-image"></i> 保存为图片</button>
 </div>
 </div>
 </div>
@@ -820,7 +834,7 @@ thead th,tbody td{padding:8px 10px}
 <div class="form-group"><label>购入途径</label><input v-model="turtleForm.purchaseChannel" placeholder="淘宝 / 花鸟市场"></div>
 <div class="form-group"><label>饲养位置</label><input v-model="turtleForm.habitat" placeholder="1号池 / 阳台缸"></div>
 </div>
-<div class="form-group"><label>备注</label><textarea v-model="turtleForm.notes" rows="2" placeholder="健康状况、特征等"></textarea></div>
+<div class="form-group"><label>备注</label><textarea ref="turtleNotesInput" v-model="turtleForm.notes" rows="2" placeholder="健康状况、特征等"></textarea></div>
 </div>
 <div class="modal-footer">
 <button class="btn btn-secondary" @click="showTurtleModal = false">取消</button>
@@ -852,7 +866,7 @@ thead th,tbody td{padding:8px 10px}
 <div class="form-group"><label>背甲长 (cm)</label><input type="number" step="0.1" v-model.number="recordForm.carapaceLength" placeholder="cm"></div>
 </div>
 <div class="form-group"><label>背甲宽 (cm)</label><input type="number" step="0.1" v-model.number="recordForm.carapaceWidth" placeholder="cm"></div>
-<div class="form-group"><label>备注</label><textarea v-model="recordForm.notes" rows="2" placeholder="进食、健康等"></textarea></div>
+<div class="form-group"><label>备注</label><textarea ref="recordNotesInput" v-model="recordForm.notes" rows="2" placeholder="进食、健康等"></textarea></div>
 </div>
 <div class="modal-footer">
 <button class="btn btn-secondary" @click="showRecordModal = false">取消</button>
@@ -1010,6 +1024,7 @@ createApp({
         const STORAGE_KEY_TURTLE_ID = 'turtle_farm_current_turtle_id';
         const STORAGE_KEY_THEME = 'turtle_farm_theme';
         const STORAGE_KEY_THEME_COLOR = 'turtle_farm_theme_color';
+        const STORAGE_KEY_SIDEBAR = 'turtle_farm_sidebar_collapsed';
 
         const currentPage = ref('dashboard');
         const currentTurtleId = ref(null);
@@ -1017,6 +1032,7 @@ createApp({
         const isImporting = ref(false);
         const currentTheme = ref('blue');
         const archiveScale = ref(1);
+        const isSidebarCollapsed = ref(false);
 
         const turtles = ref([]);
         const records = ref([]);
@@ -1043,6 +1059,8 @@ createApp({
         const archiveCard = ref(null);
         const importInput = ref(null);
         const photoInput = ref(null);
+        const recordNotesInput = ref(null);
+        const turtleNotesInput = ref(null);
         const newTagMap = reactive({});
         const selectedTag = ref('');
         const pendingImportFile = ref(null);
@@ -1116,6 +1134,11 @@ createApp({
             localStorage.setItem(STORAGE_KEY_THEME_COLOR, theme);
             updateChartsColors();
         };
+        const toggleSidebar = () => {
+            isSidebarCollapsed.value = !isSidebarCollapsed.value;
+            localStorage.setItem(STORAGE_KEY_SIDEBAR, isSidebarCollapsed.value ? '1' : '0');
+            nextTick(() => renderCharts());
+        };
         const handleStorageChange = (e) => {
             if (e.key === STORAGE_KEY_THEME_COLOR) {
                 currentTheme.value = e.newValue || 'blue';
@@ -1125,6 +1148,8 @@ createApp({
                 isDarkMode.value = e.newValue === 'dark';
                 updateThemeClass();
                 updateChartsColors();
+            } else if (e.key === STORAGE_KEY_SIDEBAR) {
+                isSidebarCollapsed.value = e.newValue === '1';
             }
         };
 
@@ -1416,7 +1441,7 @@ createApp({
             else if (e.key === 'ArrowRight') nextPhoto();
         };
 
-        // ===== 打印预览 =====
+        // ===== 档案卡预览 =====
         const archiveScaleStyle = computed(() => ({
             transform: `scale(${archiveScale.value})`,
             width: '794px'
@@ -1444,21 +1469,18 @@ createApp({
             });
         };
         const closePrintPreview = () => { showPrintPreview.value = false; };
-        const doPrint = () => { window.print(); };
 
         const saveAsImage = async () => {
             if (!archiveCard.value) return;
             const loadingId = showToast('正在生成图片...', 'success', 0, true);
+            const oldScale = archiveScale.value;
             try {
                 // 临时还原缩放，保证生成图片清晰
-                const oldScale = archiveScale.value;
                 archiveScale.value = 1;
                 await nextTick();
                 const canvas = await html2canvas(archiveCard.value, {
                     backgroundColor: '#ffffff', scale: 2, useCORS: true, logging: false
                 });
-                archiveScale.value = oldScale;
-                hideToast(loadingId);
                 canvas.toBlob((blob) => {
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
@@ -1467,11 +1489,16 @@ createApp({
                     a.download = `档案_${name}_${new Date().toISOString().split('T')[0]}.png`;
                     a.click();
                     URL.revokeObjectURL(url);
+                    hideToast(loadingId);
                     showToast('图片已保存');
                 }, 'image/png', 0.95);
             } catch (e) {
                 hideToast(loadingId);
                 showToast('生成失败：' + e.message, 'error');
+            } finally {
+                archiveScale.value = oldScale;
+                await nextTick();
+                calcArchiveScale();
             }
         };
 
@@ -1708,6 +1735,7 @@ createApp({
                 Object.assign(turtleForm, { code: '', name: '', species: '', gender: '未知', birthDate: '', purchaseDate: '', purchaseChannel: '', habitat: '', notes: '', tags: [] });
             }
             showTurtleModal.value = true;
+            nextTick(() => { if (turtleNotesInput.value) turtleNotesInput.value.style.height = ''; });
         };
         const validateTurtleForm = () => {
             let valid = true;
@@ -1757,6 +1785,7 @@ createApp({
                 });
             }
             showRecordModal.value = true;
+            nextTick(() => { if (recordNotesInput.value) recordNotesInput.value.style.height = ''; });
         };
         const validateRecordForm = () => {
             let valid = true;
@@ -1976,6 +2005,7 @@ createApp({
             const savedThemeColor = localStorage.getItem(STORAGE_KEY_THEME_COLOR) || 'blue';
             currentTheme.value = savedThemeColor;
             document.body.setAttribute('data-theme', savedThemeColor);
+            isSidebarCollapsed.value = localStorage.getItem(STORAGE_KEY_SIDEBAR) === '1';
         };
 
         restorePageState();
@@ -2036,13 +2066,14 @@ createApp({
             showDeleteRecordConfirm, showDeletePhotoConfirm, showCompressModal, showPrintPreview,
             editingTurtleId, editingRecordId, turtleForm, recordForm,
             weightChart, growthChart, printChart, archiveCard, importInput, photoInput,
+            recordNotesInput, turtleNotesInput,
             toastQueue, newTagMap, selectedTag, allTags, selectedTurtleIds, tagModalInput, tagModalSelected,
             confirmCount, confirmNames, deleteTurtleId, deleteTurtleName, deleteTurtleRecordCount,
             deleteTurtlePhotoCount, deleteRecordId, deleteRecordTurtleName, deleteRecordDate,
             isAllSelected, currentTurtle, currentTurtleRecords, currentTurtlePhotos, latestRecord,
             filteredTurtles, filteredRecords, recentRecords, thisMonthCount, avgGrowth,
-            validationErrors, clearError, isDarkMode, isImporting, currentTheme,
-            toggleTheme, setTheme, turtleLockShake, turtleLockHint, handleTurtleSelectClick,
+            validationErrors, clearError, isDarkMode, isImporting, currentTheme, isSidebarCollapsed,
+            toggleTheme, setTheme, toggleSidebar, turtleLockShake, turtleLockHint, handleTurtleSelectClick,
             isDragoverGallery, isDragoverImport,
             pendingPhotoFiles, pendingPhotoTotalSize, compressChoice,
             dragPhotoIndex, dragOverIndex,
@@ -2056,7 +2087,7 @@ createApp({
             handleDragStart, handleDragOver, handleDragLeave, handleDrop, handleDragEnd,
             movePhoto,
             openLightbox, closeLightbox, prevPhoto, nextPhoto,
-            openPrintPreview, closePrintPreview, doPrint, saveAsImage,
+            openPrintPreview, closePrintPreview, saveAsImage,
             openTurtleModal, saveTurtle, confirmDeleteTurtle, executeDeleteTurtle,
             openRecordModal, saveRecord, confirmDeleteRecord, executeDeleteRecord,
             exportData, openImportConfirm, handleImportFile, handleImportDrop, executeImport,
