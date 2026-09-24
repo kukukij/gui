@@ -55,7 +55,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 .sidebar.collapsed .nav-icon{font-size:18px;width:auto;opacity:1}
 .sidebar.collapsed .sidebar-bottom{flex-direction:column;gap:6px;align-items:center}
 .sidebar.collapsed .sidebar-footer{display:none}
-/* ===== 右侧居中凸出的收回按钮 ===== */
 .menu-bar{position:absolute;top:50%;right:-9px;transform:translateY(-50%);width:18px;height:40px;background:var(--surface);border:1px solid var(--border-light);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:45;box-shadow:0 2px 8px rgba(0,0,0,.06);color:var(--text-tertiary);transition:background .25s ease,border-color .25s ease,color .25s ease,box-shadow .25s ease;user-select:none;-webkit-user-select:none}
 body.dark-mode .menu-bar{box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .menu-bar:hover{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.35)}
@@ -894,7 +893,7 @@ thead th,tbody td{padding:8px 10px}
 </div>
 
 <script>
-const { createApp, ref, reactive, computed, onMounted, onUnmounted, nextTick, toRaw } = Vue;
+const { createApp, ref, shallowRef, reactive, computed, onMounted, onUnmounted, nextTick, toRaw } = Vue;
 
 const DB_NAME = 'TurtleFarmDB', DB_VERSION = 2, STORE_TURTLES = 'turtles', STORE_RECORDS = 'records', STORE_PHOTOS = 'photos';
 let db = null;
@@ -1035,7 +1034,7 @@ createApp({
 
         const turtles = ref([]);
         const records = ref([]);
-        const photos = ref([]);
+        const photos = shallowRef([]);
         const turtleSearch = ref('');
         const recordSearch = ref('');
         const sortBy = ref('code');
@@ -1226,6 +1225,13 @@ createApp({
                     map[r.turtleId] = { ...r, _time: t };
                 }
             });
+            return map;
+        });
+
+        // ===== 龟 ID → 对象映射，O(1) 查找 =====
+        const turtleMap = computed(() => {
+            const map = {};
+            turtles.value.forEach(t => { map[t.id] = t; });
             return map;
         });
 
@@ -1533,7 +1539,7 @@ createApp({
         const confirmBatchDelete = () => {
             if (selectedTurtleIds.value.length === 0) return;
             const ids = selectedTurtleIds.value;
-            const names = ids.map(id => { const t = turtles.value.find(x => x.id === id); return t ? (t.name || t.code) : id; });
+            const names = ids.map(id => { const t = turtleMap.value[id]; return t ? (t.name || t.code) : id; });
             confirmCount.value = ids.length;
             confirmNames.value = names.join('、');
             showConfirmModal.value = true;
@@ -1555,7 +1561,7 @@ createApp({
         };
 
         const confirmDeleteTurtle = (id) => {
-            const t = turtles.value.find(x => x.id === id);
+            const t = turtleMap.value[id];
             if (!t) return;
             deleteTurtleId.value = id;
             deleteTurtleName.value = t.name || t.code;
@@ -1678,7 +1684,7 @@ createApp({
             let count = 0;
             try {
                 for (const id of ids) {
-                    const t = turtles.value.find(x => x.id === id);
+                    const t = turtleMap.value[id];
                     if (!t) continue;
                     const tags = t.tags || [];
                     if (tags.includes(tag)) continue;
@@ -1696,7 +1702,7 @@ createApp({
             const input = newTagMap[turtleId];
             if (!input || !input.trim()) return;
             const tag = input.trim();
-            const t = turtles.value.find(x => x.id === turtleId);
+            const t = turtleMap.value[turtleId];
             if (!t) return;
             const tags = t.tags || [];
             if (tags.includes(tag)) { showToast('标签已存在', 'error'); return; }
@@ -1708,7 +1714,7 @@ createApp({
             } catch (e) { showToast('添加标签失败：' + e.message, 'error'); }
         };
         const removeTag = async (turtleId, tag) => {
-            const t = turtles.value.find(x => x.id === turtleId);
+            const t = turtleMap.value[turtleId];
             if (!t) return;
             const tags = (t.tags || []).filter(tt => tt !== tag);
             try {
@@ -1723,7 +1729,7 @@ createApp({
             validationErrors.code = false;
             validationErrors.species = false;
             if (id) {
-                const t = turtles.value.find(x => x.id === id);
+                const t = turtleMap.value[id];
                 Object.assign(turtleForm, {
                     code: t.code || '', name: t.name || '', species: t.species || '', gender: t.gender || '未知',
                     birthDate: t.birthDate || '', purchaseDate: t.purchaseDate || '',
@@ -1753,7 +1759,7 @@ createApp({
             };
             try {
                 if (editingTurtleId.value) {
-                    const existing = turtles.value.find(t => t.id === editingTurtleId.value);
+                    const existing = turtleMap.value[editingTurtleId.value];
                     await dbPut(STORE_TURTLES, { ...existing, ...data });
                     showToast('档案已更新');
                 } else {
@@ -1833,11 +1839,11 @@ createApp({
         };
 
         const turtleName = (id) => {
-            const t = turtles.value.find(x => x.id === id);
+            const t = turtleMap.value[id];
             return t ? (t.name || t.code) : '未知';
         };
         const turtleSpecies = (id) => {
-            const t = turtles.value.find(x => x.id === id);
+            const t = turtleMap.value[id];
             return t ? t.species : '-';
         };
         const genderClass = (g) => g === '雄' ? 'badge-male' : g === '雌' ? 'badge-female' : 'badge-unknown';
@@ -1847,7 +1853,7 @@ createApp({
             const s = recordSearch.value.toLowerCase().trim();
             return records.value.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).filter(r => {
                 if (!s) return true;
-                const t = turtles.value.find(x => x.id === r.turtleId);
+                const t = turtleMap.value[r.turtleId];
                 const matchCode = t && (t.code || '').toLowerCase().includes(s);
                 const matchName = t && (t.name || '').toLowerCase().includes(s);
                 const matchNotes = (r.notes || '').toLowerCase().includes(s);
@@ -2079,7 +2085,7 @@ createApp({
             showLightbox, lightboxPhotos, lightboxIndex,
             formatSize,
             archiveScale, archiveScaleStyle,
-            recordCountMap, latestRecordMap,
+            recordCountMap, latestRecordMap, turtleMap,
             navigate, viewTurtle, turtleName, turtleSpecies, genderClass, genderIcon,
             triggerFileInput, handlePhotoSelect, handlePhotoDrop, confirmDeletePhoto, executeDeletePhoto,
             cancelCompress, confirmCompress,
